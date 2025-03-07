@@ -47,26 +47,28 @@ h3{
 }
 .logoutContainer{
     position: relative;
-    height: calc(100vh - 270px);
+    height: calc(100vh - 110px);
 }
 .logoutForm{
     max-width: 440px;
     width: 100%;
     position: absolute;
-    top: 40%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%,50%);
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px;
     box-shadow: 1px 2px 3px black;
-    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    height: 200px;
 }
 .logoutText{
     text-align: center;
+    font-size: 28px;
+    padding: 20px;
 }
 .group{
     display: flex;
