@@ -11,7 +11,6 @@ const MySchedule = () => {
 
   return (
     <div className='schedule'>
-      MySchedule
       <FullCalendar
       plugins={[ dayGridPlugin, interactionPlugin ]}
       initialView="dayGridMonth"
