@@ -105,8 +105,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose}>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose}>Create</Button>
+              <Button variant='contained' color='error' onClick={handleClose} className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleClose} className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -199,8 +199,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose}>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose}>Create</Button>
+              <Button variant='contained' color='error' onClick={handleClose}  className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleClose}  className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -294,8 +294,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose}>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose}>Create</Button>
+              <Button variant='contained' color='error' onClick={handleClose}  className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleClose}  className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -405,8 +405,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose}>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose}>Create</Button>
+              <Button variant='contained' color='error' onClick={handleClose}  className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleClose}  className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -516,8 +516,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose}>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose}>Create</Button>
+              <Button variant='contained' color='error' onClick={handleClose}  className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleClose}  className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -593,8 +593,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={filterClose}>Clear</Button>
-              <Button variant='contained' color='success' onClick={filterClose}>Apply</Button>
+              <Button variant='contained' color='error' onClick={filterClose}  className='btn'>Clear</Button>
+              <Button variant='contained' color='success' onClick={filterClose}  className='btn'>Apply</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -710,8 +710,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={filterClose}>Clear</Button>
-              <Button variant='contained' color='success' onClick={filterClose}>Apply</Button>
+              <Button variant='contained' color='error' onClick={filterClose}  className='btn'>Clear</Button>
+              <Button variant='contained' color='success' onClick={filterClose}  className='btn'>Apply</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -827,8 +827,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={filterClose}>Clear</Button>
-              <Button variant='contained' color='success' onClick={filterClose}>Apply</Button>
+              <Button variant='contained' color='error' onClick={filterClose}  className='btn'>Clear</Button>
+              <Button variant='contained' color='success' onClick={filterClose}  className='btn'>Apply</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -962,8 +962,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={filterClose}>Clear</Button>
-              <Button variant='contained' color='success' onClick={filterClose}>Apply</Button>
+              <Button variant='contained' color='error' onClick={filterClose}  className='btn'>Clear</Button>
+              <Button variant='contained' color='success' onClick={filterClose}  className='btn'>Apply</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -1115,8 +1115,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={filterClose}>Clear</Button>
-              <Button variant='contained' color='success' onClick={filterClose}>Apply</Button>
+              <Button variant='contained' color='error' onClick={filterClose}  className='btn'>Clear</Button>
+              <Button variant='contained' color='success' onClick={filterClose}  className='btn'>Apply</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -1240,8 +1240,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={filterClose}>Clear</Button>
-              <Button variant='contained' color='success' onClick={filterClose}>Apply</Button>
+              <Button variant='contained' color='error' onClick={filterClose}  className='btn'>Clear</Button>
+              <Button variant='contained' color='success' onClick={filterClose}  className='btn'>Apply</Button>
             </ButtonGroup>
           </div>
         </Box>

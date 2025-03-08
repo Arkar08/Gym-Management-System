@@ -16,6 +16,7 @@ const Profile = () => {
 
   const logout = () =>{
     navigate('/auth/login')
+    localStorage.removeItem("login")
   }
 
 

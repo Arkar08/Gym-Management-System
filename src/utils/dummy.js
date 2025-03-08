@@ -5,6 +5,11 @@ const trainer = [
         icon:"dashboard"
     },
     {
+        path:"/trainer/member",
+        text:"Member List",
+        icon:"list"
+    },
+    {
         path:"/trainer/myschedule",
         text:"My Schedule",
         icon:"paid"

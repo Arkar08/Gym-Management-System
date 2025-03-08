@@ -158,7 +158,7 @@ function EnhancedTableToolbar(props) {
       {numSelected > 0? (
         <>
           {
-            name !== 'Bookings' && name !== 'Report' && name !== 'Member Lists' && name !== 'Income' ? (
+            name !== 'Bookings' && name !== 'Report' && name !== 'Member Lists' && name !== 'Income' && name !== 'Member List' ? (
               <>
                 {
                     numSelected === allData ? (
@@ -232,7 +232,7 @@ function EnhancedTableToolbar(props) {
       ) : (
         <>
           {
-            name !== 'Report' && name !== 'Income' ? (
+            name !== 'Report' && name !== 'Income' && name !== 'Member List' ? (
               <>
                 <Tooltip title="Create">
                   <Fab color="primary" aria-label="Create" size='small'>
@@ -427,7 +427,7 @@ export default function DataTable({name,rows,headCells}) {
                               <TableCell align='center'>
                                 <ButtonGroup variant="outlined" aria-label="Basic button group" size="small">
                                   <Button variant="contained" color="success" className='btn' size="small" onClick={()=> handleApprove(row.id)}>Approve</Button>
-                                  <Button variant="contained" color="error" size="small">Reject</Button>
+                                  <Button variant="contained" color="error" size="small" className='btn'>Reject</Button>
                                 </ButtonGroup>
                               </TableCell>
                             </>
@@ -451,7 +451,7 @@ export default function DataTable({name,rows,headCells}) {
                               <TableCell align='center'>
                                 <ButtonGroup variant="outlined" aria-label="Basic button group" size="small">
                                   <Button variant="contained" color="success" className='btn' size="small" onClick={()=> handleApprove(row.id)}>Accept</Button>
-                                  <Button variant="contained" color="error" size="small">Cancel</Button>
+                                  <Button variant="contained" color="error" size="small" className='btn'>Cancel</Button>
                                 </ButtonGroup>
                               </TableCell>
                             </>

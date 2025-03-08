@@ -4,16 +4,14 @@ import DataTable from '../../components/Table';
 const Income = () => {
 
    
-  function createData(id, name, classlist, training, paymentType,packages, total,createdDate) {
+  function createData(id, month, paymentType, income, remarks,paymentDate) {
     return {
       id,
-      name,
-      classlist,
-      training,
+      month,
+      income,
+      remarks,
       paymentType,
-      packages,
-      total,
-      createdDate
+      paymentDate,
     };
   }
   
@@ -49,28 +47,10 @@ const Income = () => {
       label: 'Id',
     },
     {
-      id: 'name',
+      id: 'month',
       numeric: false,
       disablePadding: true,
-      label: 'Customer Name',
-    },
-    {
-      id: 'classlist',
-      numeric: false,
-      disablePadding: true,
-      label: 'Class Name',
-    },
-    {
-      id: 'training',
-      numeric: false,
-      disablePadding: true,
-      label: 'Training By Trainer',
-    },
-    {
-      id: 'packages',
-      numeric: false,
-      disablePadding: true,
-      label: 'Package',
+      label: 'Month',
     },
     {
       id: 'paymentType',
@@ -79,13 +59,19 @@ const Income = () => {
       label: 'Payment Type',
     },
     {
-      id: 'total',
-      numeric: true,
+      id: 'income',
+      numeric: false,
       disablePadding: true,
-      label: 'Total Amount',
+      label: 'Income Amount',
     },
     {
-      id: 'createdDate',
+      id: 'remarks',
+      numeric: false,
+      disablePadding: true,
+      label: 'Remarks',
+    },
+    {
+      id: 'paymentDate',
       numeric: false,
       disablePadding: true,
       label: 'Payment Date',

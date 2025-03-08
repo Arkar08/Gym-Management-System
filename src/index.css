@@ -41,16 +41,16 @@ h3{
     text-wrap: nowrap;
 }
 .btn{
-    margin-right: 20px !important;
-    width: 120px;
+    margin-right: 10px !important;
+    width: 100px;
 }
 .logoutContainer{
     position: relative;
     height: calc(100vh - 110px);
+    width: calc(100vw - 300px);
 }
 .logoutForm{
-    max-width: 440px;
-    width: 100%;
+    width: 440px;
     position: absolute;
     top: 10%;
     left: 50%;
@@ -76,7 +76,7 @@ h3{
     margin: 10px;
 }
 button{
-    margin-right: 20px !important;
+    margin-right: 10px !important;
 }
 .profileContainer{
     display: flex;
@@ -217,12 +217,141 @@ label{
     margin-top: 40px;
  }
  .schedule{
-    min-width: calc(100vw - 285px);
-    height: 100%;
+    min-width: calc(100vw - 300px);
+    width: 100%;
+    height: 90vh;
     overflow: auto;
+    padding-bottom: 20px;
  }
  .gridClass{
     margin-top: 20px;
     overflow: auto;
     padding: 10px;
  }
+ .cardBody{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+ }
+ .cardHeader{
+    text-align: center;
+    font-size: 28px !important;
+    font-weight: 500 !important;
+ }
+ .cardDate{
+    font-weight: bold !important;
+ }
+
+ @media only screen and (max-width: 600px) {
+    .sidebar{
+        width: 50px;
+    }
+    .MuiTypography-root:where(.css-cfq8qh-MuiListItemText-root .MuiListItemText-primary) {
+        display: none !important;
+    }
+    .logoutContainer{
+        width: 100vw;
+    }
+    .logoutForm{
+        width: 250px;
+        position: absolute;
+        top: 10%;
+        left: 43%;
+    }
+    .btn{
+        width: 80px;
+    }
+    .logoutText{
+        text-align: center;
+        font-size: 22px;
+    }
+    .fc .fc-toolbar{
+        display: block !important;
+    }
+    .fc-direction-ltr{
+        height: 80vh !important;
+    }
+    .schedule{
+        width: 80vw !important;
+        overflow: auto;
+        padding-bottom: 10px;
+    }
+    .outlet{
+        padding: 10px;
+    }
+    .css-1gak8h1-MuiToolbar-root-MuiTablePagination-toolbar{
+        padding: 0px !important;
+    }
+    .css-oegngy-MuiInputBase-root-MuiTablePagination-select{
+        margin: 0px !important;
+    }
+    .css-1gak8h1-MuiToolbar-root-MuiTablePagination-toolbar .MuiTablePagination-actions{
+        margin-left: 0px !important;
+    }
+    .css-h7cjts-MuiButtonBase-root-MuiIconButton-root{
+        padding: 0px !important;
+    }
+    tr{
+        text-wrap: nowrap;
+    }
+    .css-1e9ya6q-MuiTableCell-root {
+        padding: 10px !important;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .sidebar{
+        width: 50px;
+    }
+    .MuiTypography-root:where(.css-cfq8qh-MuiListItemText-root .MuiListItemText-primary) {
+        display: none !important;
+    }
+    .logoutContainer{
+        width: 100vw;
+    }
+    .logoutForm{
+        width: 250px;
+        position: absolute;
+        top: 10%;
+        left: 43%;
+    }
+    .btn{
+        width: 80px;
+    }
+    .logoutText{
+        text-align: center;
+        font-size: 22px;
+    }
+    .fc .fc-toolbar{
+        display: block !important;
+    }
+    .fc-direction-ltr{
+        height: 80vh !important;
+    }
+    .schedule{
+        width: 80vw !important;
+        overflow: auto;
+        padding-bottom: 10px;
+    }
+    .outlet{
+        padding: 10px;
+    }
+    .css-1gak8h1-MuiToolbar-root-MuiTablePagination-toolbar{
+        padding: 0px !important;
+    }
+    .css-oegngy-MuiInputBase-root-MuiTablePagination-select{
+        margin: 0px !important;
+    }
+    .css-1gak8h1-MuiToolbar-root-MuiTablePagination-toolbar .MuiTablePagination-actions{
+        margin-left: 0px !important;
+    }
+    .css-h7cjts-MuiButtonBase-root-MuiIconButton-root{
+        padding: 0px !important;
+    }
+    tr{
+        text-wrap: nowrap;
+    }
+    .css-1e9ya6q-MuiTableCell-root {
+        padding: 10px !important;
+    }
+  }

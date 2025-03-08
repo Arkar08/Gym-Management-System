@@ -11,6 +11,7 @@ import Login from '../pages/auth/Login'
 import Logout from '../pages/auth/logout'
 import Signup from '../pages/auth/signup'
 import Income from '../pages/trainers/Income'
+import Member from '../pages/trainers/Member'
 import MyClass from '../pages/trainers/MyClass'
 import MySchedule from '../pages/trainers/MySchedule'
 import TrainerDashboard from '../pages/trainers/TrainerDashboard'
@@ -94,6 +95,11 @@ const data = [
                 path:"trainer/income",
                 text:"Income",
                 Component:Income
+            },
+            {
+                path:"trainer/member",
+                text:"Member",
+                Component:Member
             }
         ]
     }
