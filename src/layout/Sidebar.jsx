@@ -3,7 +3,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import Icon from '@mui/material/Icon';
 
-const Sidebar = ({data}) => {
+const Sidebar = ({data,active}) => {
 
     const getActiveStyle = ({isActive}) =>{
         return {
@@ -13,7 +13,7 @@ const Sidebar = ({data}) => {
 
 
   return (
-    <div className='sidebar'>
+    <div className={active ? 'activeMenu':'sidebar'}>
         
         <MenuList>
         {

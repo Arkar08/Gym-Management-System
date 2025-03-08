@@ -15,7 +15,7 @@ const MyClass = () => {
     <div className='schedule'>
       <h3>My Class</h3>
       <Grid container  spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}className='gridClass'>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -39,7 +39,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -63,7 +63,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -87,7 +87,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -111,7 +111,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -135,7 +135,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -159,7 +159,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -183,7 +183,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -207,7 +207,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -231,7 +231,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -255,7 +255,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>
@@ -279,7 +279,7 @@ const MyClass = () => {
             </CardActionArea>
           </Card>
         </Grid>
-        <Grid size={4}>
+        <Grid size={{xs:4,md:3}}>
           <Card sx={{ maxWidth: 395 }}>
             <CardActionArea>
               <CardContent>

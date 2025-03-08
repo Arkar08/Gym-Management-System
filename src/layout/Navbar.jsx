@@ -10,7 +10,6 @@ import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { useNavigate } from 'react-router-dom';
 
@@ -54,13 +53,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar() {
+export default function Navbar({toggle}) {
+
+  const [activeMenu,setActiveMenu] = React.useState(false)
 
   const navigation = useNavigate()
 
   const handleClick = () =>{
     navigation('/profile')
   }
+
+  React.useEffect(()=>{
+    if(window.innerWidth > 900){
+      setActiveMenu(false)
+    }else if(window.innerWidth < 900){
+      setActiveMenu(true)
+    }
+  },[activeMenu])
+
 
 
 
@@ -74,8 +84,9 @@ export default function Navbar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            className={activeMenu ? 'activeMenu':'menu'}
           >
-            <MenuIcon />
+            <MenuIcon onClick={toggle}/>
           </IconButton>
           <Typography
             variant="h6"

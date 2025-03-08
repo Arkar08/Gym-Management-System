@@ -8,6 +8,7 @@ import trainer from '../utils/dummy.js'
 const Main = () => {
 
   const [data , setData] = useState([])
+  const [active , setActive] = useState(false)
 
   useEffect(()=>{
     const login = localStorage.getItem("login")
@@ -17,14 +18,27 @@ const Main = () => {
       setData(trainer)
     }
   },[data])
+
+  const toggle = () =>{
+    setActive(!active)
+    if(window.innerWidth < 900){
+      setActive(true)
+    }
+  }
+
+  useEffect(()=>{
+    if(window.innerWidth < 900){
+      setActive(true)
+    }
+  },[active])
  
 
   return (
     <div>
-      <Navbar/>
+      <Navbar toggle={toggle}/>
       <div className='drawer'>
-        <Sidebar data={data}/>
-        <div className='outlet'>
+        <Sidebar data={data} active ={active }/>
+        <div className={active ? 'outletActive':'outlet'}>
           <Outlet/>
         </div>
       </div>

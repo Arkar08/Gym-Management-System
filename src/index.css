@@ -6,15 +6,47 @@
 .drawer{
     display: flex;
     height: calc(100vh - 65px);
+    width: 100vw;
 }
 .outlet{
     padding: 20px;
     overflow: hidden;
+    max-width: calc(100vw - 250px);
+    width: 100%;
+    transition: all 0.5s ease-in-out;
 }
 .sidebar{
-    max-width: 250px;
-    width: 100%;
+    width: 250px;
     box-shadow: 1px 2px 2px gray;
+    transition: all 0.5s ease-in-out;
+}
+.activeMenu{
+    width: 50px;
+    box-shadow: 1px 2px 2px gray;
+    transition: all 0.5s ease-out;
+
+    .MuiTypography-root:where(.css-cfq8qh-MuiListItemText-root .MuiListItemText-primary) {
+        display: none !important;
+        transition: all 0.5s ease-out;
+    }
+}
+.outletActive{
+    max-width: calc(100vw - 50px);
+    width: 100%;
+    padding: 20px;
+    overflow: hidden;
+    transition: all 0.5s ease-out;
+    
+
+    .fc-scrollgrid-sync-table{
+        width: calc(100vw - 120px) !important;
+        transition: all 0.5s ease-out;
+    }
+
+    .fc-col-header {
+        width: calc(100vw - 120px) !important;
+        transition: all 0.5s ease-out;
+    }
 }
 
 li{
@@ -219,7 +251,7 @@ label{
  .schedule{
     min-width: calc(100vw - 300px);
     width: 100%;
-    height: 90vh;
+    height: 85vh;
     overflow: auto;
     padding-bottom: 20px;
  }
@@ -242,6 +274,13 @@ label{
     font-weight: bold !important;
  }
 
+ .activeMenuName{
+    display: none;
+ }
+
+ .menu{
+    display: block;
+ }
  @media only screen and (max-width: 600px) {
     .sidebar{
         width: 50px;
@@ -270,11 +309,6 @@ label{
     }
     .fc-direction-ltr{
         height: 80vh !important;
-    }
-    .schedule{
-        width: 80vw !important;
-        overflow: auto;
-        padding-bottom: 10px;
     }
     .outlet{
         padding: 10px;
@@ -328,11 +362,6 @@ label{
     .fc-direction-ltr{
         height: 80vh !important;
     }
-    .schedule{
-        width: 80vw !important;
-        overflow: auto;
-        padding-bottom: 10px;
-    }
     .outlet{
         padding: 10px;
     }
@@ -353,5 +382,18 @@ label{
     }
     .css-1e9ya6q-MuiTableCell-root {
         padding: 10px !important;
+    }
+    .fc-scrollgrid-sync-table{
+        width: calc(100vw - 80px) !important;
+        transition: all 0.5s ease-out;
+    }
+
+    .fc-col-header {
+        width: calc(100vw - 80px) !important;
+        transition: all 0.5s ease-out;
+    }
+    .outlet{
+        max-width: calc(100vw - 50px);
+        width: 100%;
     }
   }

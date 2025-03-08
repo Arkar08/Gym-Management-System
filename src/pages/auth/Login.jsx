@@ -7,10 +7,10 @@ const Login = () => {
   const navigate = useNavigate()
 
   const login = () =>{
-    // localStorage.setItem("login","admin")
-    // navigate("/dashboard")
-    localStorage.setItem("login","trainer")
-    navigate("/trainer/dashboard")
+    localStorage.setItem("login","admin")
+    navigate("/dashboard")
+    // localStorage.setItem("login","trainer")
+    // navigate("/trainer/dashboard")
   }
 
   return (
