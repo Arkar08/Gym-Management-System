@@ -21,7 +21,7 @@ const Profile = () => {
 
 
   return (
-    <div className='mainProfile'>
+    <div>
       <h3>Profile</h3>
       <div className='profileContainer'>
         <div className='profileImageContainer'>
@@ -69,7 +69,7 @@ const Profile = () => {
               <label htmlFor="Address">Address</label>
               <TextField id="outlined-basic" label="Address" variant="outlined" />
             </div>
-            <div className='btnGroup'>
+            <div className='btnGroup1'>
               <Button variant='contained' className='save' disabled>Save</Button>
             </div>
           </form>
@@ -97,7 +97,7 @@ const Profile = () => {
                 hide3 ? <VisibilityIcon className='eyeIcon' onClick={() =>setHide3(!hide3)}/> : <VisibilityOffIcon className='eyeIcon' onClick={() =>setHide3(!hide3)}/>
               }
             </div>
-            <div className='btnGroup'>
+            <div className='btnGroup1'>
               <Button variant='contained' disabled>Change Password</Button>
             </div>
           </form>

@@ -10,8 +10,9 @@
 }
 .outlet{
     padding: 20px;
-    overflow: hidden;
-    max-width: calc(100vw - 250px);
+    overflow: auto;
+    max-width: calc(100vw - 230px);
+    height: 100%;
     width: 100%;
     transition: all 0.5s ease-in-out;
 }
@@ -19,6 +20,9 @@
     width: 250px;
     box-shadow: 1px 2px 2px gray;
     transition: all 0.5s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 .activeMenu{
     width: 50px;
@@ -33,19 +37,16 @@
 .outletActive{
     max-width: calc(100vw - 50px);
     width: 100%;
-    padding: 20px;
+    padding: 10px;
     overflow: hidden;
     transition: all 0.5s ease-out;
+    overflow: auto;
     
-
-    .fc-scrollgrid-sync-table{
-        width: calc(100vw - 120px) !important;
-        transition: all 0.5s ease-out;
+    table {
+        width: 100% !important;
     }
-
-    .fc-col-header {
-        width: calc(100vw - 120px) !important;
-        transition: all 0.5s ease-out;
+    .fc .fc-daygrid-body{
+        width: 100% !important;
     }
 }
 
@@ -61,11 +62,10 @@ h3{
     font-weight: 500;
 }
 .css-70zvr5-MuiTableContainer-root{
-    height: calc(100vh - 220px) !important;
+    height: calc(100vh - 240px) !important;
     overflow: auto !important;
 }
 .tableContainer{
-    min-width: calc(100vw - 285px) !important;
     width: 100% !important;
     overflow-x: auto !important;
 }
@@ -129,13 +129,6 @@ button{
     border-radius: 10px;
     box-shadow: 1px 2px 3px gray;
     padding: 30px;
-}
-.mainProfile{
-    overflow-y: auto;
-    min-height: calc(100vh - 100px);
-    height: 100%;
-    width: calc(100vw - 280px);
-    padding-bottom: 10px;
 }
 .imageContainer{
     width: 180px;
@@ -220,7 +213,7 @@ label{
     font-weight: 500;
     letter-spacing: 1px;
 }
-.btnGroup{
+.btnGroup1{
     margin: 20px 0px;
 }
 .save{
@@ -246,7 +239,6 @@ label{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 40px;
  }
  .schedule{
     min-width: calc(100vw - 300px);
@@ -281,21 +273,26 @@ label{
  .menu{
     display: block;
  }
+ .modal{
+    width: 900px;
+ }
+ .activeModal{
+    width: 350px;
+    height: 520px;
+    overflow: auto;
+ }
+ tr{
+    text-wrap: nowrap;
+}
+.css-1e9ya6q-MuiTableCell-root {
+    padding: 10px !important;
+}
  @media only screen and (max-width: 600px) {
     .sidebar{
         width: 50px;
     }
     .MuiTypography-root:where(.css-cfq8qh-MuiListItemText-root .MuiListItemText-primary) {
         display: none !important;
-    }
-    .logoutContainer{
-        width: 100vw;
-    }
-    .logoutForm{
-        width: 250px;
-        position: absolute;
-        top: 10%;
-        left: 43%;
     }
     .btn{
         width: 80px;
@@ -325,11 +322,16 @@ label{
     .css-h7cjts-MuiButtonBase-root-MuiIconButton-root{
         padding: 0px !important;
     }
-    tr{
-        text-wrap: nowrap;
+    .profileContainer{
+        display: flex;
+        flex-direction: column;
     }
-    .css-1e9ya6q-MuiTableCell-root {
-        padding: 10px !important;
+    .profileImageContainer{
+        width: 100%;
+    }
+    .profileFormContainer{
+        width: 100%;
+        padding: 10px;
     }
   }
 
@@ -341,13 +343,13 @@ label{
         display: none !important;
     }
     .logoutContainer{
-        width: 100vw;
+        width: 100%;
     }
     .logoutForm{
-        width: 250px;
+        width: 300px;
         position: absolute;
         top: 10%;
-        left: 43%;
+        left: 50%;
     }
     .btn{
         width: 80px;
@@ -360,7 +362,7 @@ label{
         display: block !important;
     }
     .fc-direction-ltr{
-        height: 80vh !important;
+        height: 82vh !important;
     }
     .outlet{
         padding: 10px;
@@ -377,23 +379,19 @@ label{
     .css-h7cjts-MuiButtonBase-root-MuiIconButton-root{
         padding: 0px !important;
     }
-    tr{
-        text-wrap: nowrap;
-    }
-    .css-1e9ya6q-MuiTableCell-root {
-        padding: 10px !important;
-    }
-    .fc-scrollgrid-sync-table{
-        width: calc(100vw - 80px) !important;
-        transition: all 0.5s ease-out;
-    }
-
-    .fc-col-header {
-        width: calc(100vw - 80px) !important;
-        transition: all 0.5s ease-out;
-    }
     .outlet{
         max-width: calc(100vw - 50px);
         width: 100%;
+    }
+    .profileContainer{
+        display: flex;
+        flex-direction: column;
+    }
+    .profileImageContainer{
+        width: 100%;
+    }
+    .profileFormContainer{
+        width: 100%;
+        padding: 10px;
     }
   }

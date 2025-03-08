@@ -29,6 +29,14 @@ const Sidebar = ({data,active}) => {
             })
         }  
         </MenuList>
+        <MenuList>
+            <NavLink to='profile' style={getActiveStyle}>
+                <MenuItem>
+                    <Icon className='icon'> person</Icon>
+                    <ListItemText>Profile</ListItemText>
+                </MenuItem>
+            </NavLink>
+        </MenuList>
     </div>
   )
 }

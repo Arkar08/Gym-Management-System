@@ -17,7 +17,6 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
   bgcolor: 'background.paper',
   border: '1px solid #000',
   boxShadow: 24,
@@ -29,6 +28,8 @@ const style = {
 
 
 export default function ModalBox(props) {
+
+    const [activeModal , setActiveModal] = React.useState(false)
     const {open , handleClose,selectedName,filterOpen,filterClose,filterName} = props;
     const [role, setRole] = React.useState('');
     const [hide ,setHide] = React.useState(false)
@@ -37,6 +38,14 @@ export default function ModalBox(props) {
     setRole(event.target.value);
   };
 
+  React.useEffect(()=>{
+    if(window.innerWidth > 900){
+      setActiveModal(false)
+    }else if(window.innerWidth < 900){
+      setActiveModal(true)
+    }
+  },[activeModal])
+
   if(selectedName === 'User Listings' ){
     return (
       <Modal
@@ -44,9 +53,9 @@ export default function ModalBox(props) {
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
       >
-        <Box sx={{ ...style, width: 900 }}>
+        <Box  sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Create User</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
               <div className='formField'>
                 <label htmlFor='name'>Name <span className='star'>*</span></label>
@@ -60,7 +69,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="password">Password <span className='star'>*</span></label>
@@ -77,7 +86,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Address">Address <span className='star'>*</span></label>
@@ -121,9 +130,9 @@ export default function ModalBox(props) {
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
       >
-        <Box sx={{ ...style, width: 900 }}>
+        <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Create ClassList</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
               <div className='formField'>
                 <label htmlFor='Class Name'>Class Name <span className='star'>*</span></label>
@@ -149,7 +158,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Start Time">Start Time <span className='star'>*</span></label>
@@ -167,7 +176,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Days">Days <span className='star'>*</span></label>
@@ -183,7 +192,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Price">Price <span className='star'>*</span></label>
@@ -216,9 +225,9 @@ export default function ModalBox(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-          <Box sx={{ ...style, width: 900 }}>
+          <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Create MemberShip Plan</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
               <div className='formField'>
                 <label htmlFor='Plan Name'>Plan Name <span className='star'>*</span></label>
@@ -244,7 +253,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Access Type">Access Type <span className='star'>*</span></label>
@@ -270,7 +279,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Capacity">Capacity <span className='star'>*</span></label>
@@ -284,7 +293,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Features">Features <span className='star'>*</span></label>
@@ -311,9 +320,9 @@ export default function ModalBox(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 900 }}>
+        <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Create Booking</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
               <div className='formField'>
                 <label htmlFor='Customer Name'>Customer Name <span className='star'>*</span></label>
@@ -351,7 +360,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Trainer">Trainer <span className='star'>*</span></label>
@@ -377,7 +386,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Price">Price <span className='star'>*</span></label>
@@ -422,9 +431,9 @@ export default function ModalBox(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 900 }}>
+        <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Create MemberList</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
               <div className='formField'>
                 <label htmlFor='Customer Name'>Customer Name <span className='star'>*</span></label>
@@ -462,7 +471,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Trainer">Trainer <span className='star'>*</span></label>
@@ -488,7 +497,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Start Date">Start Date <span className='star'>*</span></label>
@@ -506,7 +515,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Price">Price <span className='star'>*</span></label>
@@ -533,9 +542,9 @@ export default function ModalBox(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-         <Box sx={{ ...style, width: 900 }}>
+         <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Filter</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="From Date">From Date </label>
@@ -553,7 +562,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Address">Address </label>
@@ -610,9 +619,9 @@ export default function ModalBox(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-         <Box sx={{ ...style, width: 900 }}>
+         <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Filter</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Class Name">Class Name </label>
@@ -650,7 +659,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Days">Days </label>
@@ -688,7 +697,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Capacity">Capacity </label>
@@ -727,9 +736,9 @@ export default function ModalBox(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 900 }}>
+        <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Filter</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Plan Name">Plan Name </label>
@@ -767,7 +776,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Access Type">Access Type </label>
@@ -805,7 +814,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Capacity">Capacity </label>
@@ -844,9 +853,9 @@ export default function ModalBox(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 900 }}>
+        <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Filter</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Customer Name">Customer Name </label>
@@ -884,7 +893,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Trainer">Trainer</label>
@@ -922,7 +931,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Payment Type">Payment Type </label>
@@ -979,9 +988,9 @@ export default function ModalBox(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 900 }}>
+        <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Filter</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="From Date">From Date </label>
@@ -999,7 +1008,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Customer Name">Customer Name </label>
@@ -1037,7 +1046,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Trainer">Trainer </label>
@@ -1075,7 +1084,7 @@ export default function ModalBox(props) {
               </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Payment Type">Payment Type </label>
@@ -1132,9 +1141,9 @@ export default function ModalBox(props) {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 900 }}>
+        <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
           <h2 className='userCreate' id="parent-modal-title">Filter</h2>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Payment Date"> Payment Date </label>
@@ -1162,7 +1171,7 @@ export default function ModalBox(props) {
                 </div>
               </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Package">Package </label>
@@ -1200,7 +1209,7 @@ export default function ModalBox(props) {
                 </div>
             </Grid>
           </Grid>
-          <Grid container spacing={2}>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Trainer">Trainer</label>
