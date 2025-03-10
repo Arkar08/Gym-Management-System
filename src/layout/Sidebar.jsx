@@ -1,5 +1,5 @@
 import { MenuItem, MenuList,ListItemText } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import Icon from '@mui/material/Icon';
 
@@ -10,6 +10,14 @@ const Sidebar = ({data,active}) => {
             "color":isActive? 'blue':"black"
         }
     }
+
+    const [profileView,setProfileView] = useState(false)
+
+    useEffect(()=>{
+        if(window.innerWidth < 900){
+            setProfileView(true)
+        }
+    },[profileView])
 
 
   return (
@@ -29,7 +37,9 @@ const Sidebar = ({data,active}) => {
             })
         }  
         </MenuList>
-        <MenuList>
+       {
+        profileView ? (
+            <MenuList>
             <NavLink to='profile' style={getActiveStyle}>
                 <MenuItem>
                     <Icon className='icon'> person</Icon>
@@ -37,6 +47,8 @@ const Sidebar = ({data,active}) => {
                 </MenuItem>
             </NavLink>
         </MenuList>
+        ):""
+       }
     </div>
   )
 }

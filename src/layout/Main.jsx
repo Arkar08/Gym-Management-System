@@ -37,7 +37,7 @@ const Main = () => {
     <div>
       <Navbar toggle={toggle}/>
       <div className='drawer'>
-        <Sidebar data={data} active ={active }/>
+        <Sidebar data={data} active={active }/>
         <div className={active ? 'outletActive':'outlet'}>
           <Outlet/>
         </div>
