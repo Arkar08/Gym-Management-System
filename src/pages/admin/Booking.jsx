@@ -105,12 +105,20 @@ const Booking = () => {
     },
   ];
   
-  const {bookings} = useContext(BookingContext)
+  const {bookings,error} = useContext(BookingContext)
 
   return (
-    <div className='tableContainer'>
-      <DataTable name="Class Bookings" rows={bookings} headCells={headCells}/>
-    </div>
+   <>
+      {
+        error ? (
+          <div>{error.message}</div>
+        ):(
+          <div className='tableContainer'>
+            <DataTable name="Class Bookings" rows={bookings} headCells={headCells}/>
+          </div>
+        )
+      }
+   </>
   )
 }
 

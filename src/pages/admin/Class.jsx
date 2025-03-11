@@ -119,12 +119,21 @@ const Class = () => {
     },
   ];
 
-  const {classes} = useContext(ClassContext)
+  const {classes,error} = useContext(ClassContext)
 
   return (
-    <div className='tableContainer'>
-        <DataTable name='Class Listings' rows={classes} headCells={headCells}/>
-    </div>
+    <>
+      {
+        error ? 
+        (
+          <div>{error.message}</div>
+        ) : (
+          <div className='tableContainer'>
+            <DataTable name='Class Listings' rows={classes} headCells={headCells}/>
+          </div>
+        )
+      }
+    </>
   )
 }
 
