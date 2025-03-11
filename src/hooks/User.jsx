@@ -14,6 +14,8 @@ const UserProvider  = ({children}) =>{
     const [users,setUsers] = useState([])
     const [error ,setError] = useState(false)
     const [roles , setRoles] = useState([])
+    const [trainer ,setTrainer] = useState([])
+    const [customer ,setCustomer] = useState([])
     const [createUser , setCreateUser] = useState({
         name:"",
         email:"",
@@ -27,6 +29,8 @@ const UserProvider  = ({children}) =>{
     useEffect(()=>{
         getUser()
         getRole()
+        getTrainer()
+        getCustomer()
     },[])
 
     const getUser = async() =>{
@@ -43,6 +47,19 @@ const UserProvider  = ({children}) =>{
         setRoles(Role)
     }
 
+    const getTrainer = async() =>{
+        const {data:Trainer,error} = await supabase.from("User").select('*').eq("roleId","trainer")
+        setError(error)
+        setTrainer(Trainer)
+    }
+
+    const getCustomer = async() =>{
+        const {data:Customer,error} = await supabase.from("User").select('*').eq("roleId","customer")
+        setError(error)
+        setCustomer(Customer)
+    }
+
+
     
     const handleChange = (event) => {
         setCreateUser(prevState => ({
@@ -55,9 +72,9 @@ const UserProvider  = ({children}) =>{
     const handleCreate = async() =>{
         const {data:User,error} = await supabase.from("User").insert([createUser])
         setError(error)
-        if(User === null){
-            setSelectedName("")
-            setOpen(true)
+        setSelectedName("")
+        setOpen(true)
+        if(User === null && error === null){
             setCreateUser({
                 name:"",
                 email:"",
@@ -88,7 +105,7 @@ const UserProvider  = ({children}) =>{
     }
 
     return (
-        <UserContext.Provider value={{users,error,roles,createUser,handleCreate,handleChange,handleCloseUser}}>
+        <UserContext.Provider value={{users,error,roles,createUser,handleCreate,handleChange,handleCloseUser,trainer,customer}}>
             {children}
         </UserContext.Provider>
     )

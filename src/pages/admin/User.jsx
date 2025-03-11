@@ -91,13 +91,25 @@ const User = () => {
     },
   ];
 
-  const {users} = useContext(UserContext)
+  const {users,error} = useContext(UserContext)
 
 
   return (
-    <div className='tableContainer'>
-      <DataTable name="User Listings" rows={users} headCells={headCells}/>
-    </div>
+    
+    <>
+      {
+        error ?
+        (
+          <div>{error.message}</div>
+        ) : 
+        ( 
+          <div className='tableContainer'>
+            <DataTable name="User Listings" rows={users} headCells={headCells}/>
+          </div>
+        )
+      }
+    </>
+   
   )
 }
 

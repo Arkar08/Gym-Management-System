@@ -34,7 +34,10 @@ export default function ModalBox(props) {
     const {open , handleClose,selectedName,filterOpen,filterClose,filterName} = props;
     const [role, setRole] = React.useState('');
     const [hide ,setHide] = React.useState(false)
-    const {roles,createUser,handleCreate,handleChange,handleCloseUser} = React.useContext(UserContext)
+    const {roles,createUser,handleCreate,handleChange,handleCloseUser,trainer,customer} = React.useContext(UserContext)
+
+
+    
 
 
   React.useEffect(()=>{
@@ -161,9 +164,18 @@ export default function ModalBox(props) {
                   <MenuItem value="">
                     <em>Select</em>
                   </MenuItem>
-                  <MenuItem value="Customer">Customer</MenuItem>
+                  {
+                    trainer.map((train)=>{
+                      return(
+                        <MenuItem key={train.id} value={train.name}>
+                          {train.name}
+                        </MenuItem>
+                      )
+                    })
+                  }
+                  {/* <MenuItem value="Customer">Customer</MenuItem>
                   <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
+                  <MenuItem value="Admin">Admin</MenuItem> */}
                 </Select>
               </div>
             </Grid>
@@ -345,33 +357,22 @@ export default function ModalBox(props) {
                   <MenuItem value="">
                     <em>Select</em>
                   </MenuItem>
-                  <MenuItem value="Customer">Customer</MenuItem>
+                  {/* <MenuItem value="Customer">Customer</MenuItem>
                   <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
+                  <MenuItem value="Admin">Admin</MenuItem> */}
+                  {
+                    customer.map((cus)=>{
+                      return (
+                        <MenuItem key={cus.id} value={cus.name}>
+                          {cus.name}
+                        </MenuItem>
+                      )
+                    })
+                  }
                 </Select>
               </div>
             </Grid>
             <Grid size={6}>
-               <div className='formField'>
-                <label htmlFor='Class Name'>Class Name <span className='star'>*</span></label>
-                <Select
-                  value={role}
-                  onChange={handleChange}
-                  displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
-                >
-                  <MenuItem value="">
-                    <em>Select</em>
-                  </MenuItem>
-                  <MenuItem value="Customer">Customer</MenuItem>
-                  <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
-                </Select>
-              </div>
-            </Grid>
-          </Grid>
-          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-              <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Trainer">Trainer <span className='star'>*</span></label>
                   <Select
@@ -379,6 +380,35 @@ export default function ModalBox(props) {
                   onChange={handleChange}
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>Select</em>
+                    </MenuItem>
+                    {/* <MenuItem value="Customer">Customer</MenuItem>
+                    <MenuItem value="Trainer">Trainer</MenuItem>
+                    <MenuItem value="Admin">Admin</MenuItem> */}
+                    {
+                      trainer.map((train)=>{
+                        return(
+                          <MenuItem key={train.id} value={train.name}>
+                            {train.name}
+                          </MenuItem>
+                        )
+                      })
+                    }
+                  </Select>
+                </div>
+              </Grid>
+          </Grid>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <Grid size={6}>
+                <div className='formField'>
+                  <label htmlFor='Class Name'>Class Name <span className='star'>*</span></label>
+                  <Select
+                    value={role}
+                    onChange={handleChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
                   >
                     <MenuItem value="">
                       <em>Select</em>
@@ -415,9 +445,10 @@ export default function ModalBox(props) {
                   <MenuItem value="">
                     <em>Select</em>
                   </MenuItem>
-                  <MenuItem value="Customer">Customer</MenuItem>
-                  <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
+                  <MenuItem value="Cash">Cash</MenuItem>
+                  <MenuItem value="KBZ Pay">KBZ Pay</MenuItem>
+                  <MenuItem value="Wave Pay">Wave Pay</MenuItem>
+                  <MenuItem value="OK $">OK $</MenuItem>
                 </Select>
               </div>
             </Grid>

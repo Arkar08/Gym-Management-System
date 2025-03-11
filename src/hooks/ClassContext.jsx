@@ -9,7 +9,7 @@ export const ClassContext = createContext()
 const ClassProvider = ({children}) =>{
 
     const [classes , setClasses] = useState([])
-    const [error ,setError] = useState(false)
+    const [error ,setError] = useState(false);
 
     useEffect(()=>{
         getClass()
@@ -20,6 +20,8 @@ const ClassProvider = ({children}) =>{
         setError(error)
         setClasses(Classes)
     }
+
+
 
     return(
         <ClassContext.Provider value={{error,classes}}>
