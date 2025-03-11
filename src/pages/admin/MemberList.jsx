@@ -48,7 +48,7 @@ const MemberList = () => {
       id: 'id',
       numeric: false,
       disablePadding: true,
-      label: 'Id',
+      label: 'ID',
     },
     {
       id: 'name',
@@ -120,7 +120,7 @@ const MemberList = () => {
 
   return (
     <div className='tableContainer'>
-      <DataTable name="Member Lists" rows={rows} headCells={headCells}/>
+      <DataTable name="Sale Plan" rows={rows} headCells={headCells}/>
     </div>
   )
 }

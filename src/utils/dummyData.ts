@@ -23,12 +23,12 @@ const dummy = [
     },
     {
         path:"/memberlist",
-        text:"Member Lists",
-        icon:"list"
+        text:"Sale Plan",
+        icon:"point_of_sale"
     },
     {
         path:"/booking",
-        text:"Booking",
+        text:"Class Booking",
         icon:"event_available"
     },
     {

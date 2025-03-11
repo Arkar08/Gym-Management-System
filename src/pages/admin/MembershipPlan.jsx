@@ -44,7 +44,7 @@ const MembershipPlan = () => {
       id: 'id',
       numeric: true,
       disablePadding: true,
-      label: 'Id',
+      label: 'ID',
     },
     {
       id: 'name',

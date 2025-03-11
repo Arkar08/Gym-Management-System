@@ -13,11 +13,9 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import AddBoxIcon from '@mui/icons-material/AddBox'
 import { visuallyHidden } from '@mui/utils';
 import ModalBox from './ModalBox';
 import FileDownloadIcon from '@mui/icons-material/FileDownload';
@@ -26,7 +24,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Button,ButtonGroup } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-
+import { TableContext } from '../hooks/TableContext';
 
 
 function descendingComparator(a, b, orderBy) {
@@ -93,14 +91,14 @@ function EnhancedTableHead(props) {
           </TableCell>
         ))}
         {
-          name === 'Bookings' && (
+          name === 'Class Bookings' && (
             <TableCell align='center'>
               Action
             </TableCell>
           )
         }
         {
-          name === 'Member Lists' && (
+          name === 'Sale Plan' && (
             <TableCell align='center'>
               Action
             </TableCell>
@@ -158,7 +156,7 @@ function EnhancedTableToolbar(props) {
       {numSelected > 0? (
         <>
           {
-            name !== 'Bookings' && name !== 'Report' && name !== 'Member Lists' && name !== 'Income' && name !== 'Member List' ? (
+            name !== 'Class Bookings' && name !== 'Report' && name !== 'Sale Plan' && name !== 'Income' && name !== 'Member List' ? (
               <>
                 {
                     numSelected === allData ? (
@@ -271,31 +269,10 @@ export default function DataTable({name,rows,headCells}) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [selectedName,setSelectedName] = React.useState('')
-  const [open, setOpen] = React.useState(false);
-  const [filterOpen , setFilterOpen] = React.useState(false)
-  const [filterName , setFilterName] = React.useState('')
-  const [show , setShow] = React.useState(true)
 
-  const handleOpen = ({name}) => {
-    setSelectedName(name)
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setSelectedName("")
-    setOpen(false);
-  };
+  const {selectedName,open,filterOpen,filterName,show,handleApprove,handleOpen,handleClose,filterClick,filterClose} = React.useContext(TableContext)
 
-  const filterClick = ({name})=>{
-    setFilterName(name)
-    setFilterOpen(true)
-  }
-
-  const filterClose = ()=>{
-    setFilterOpen(false)
-    setFilterName("")
-  }
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -340,10 +317,7 @@ export default function DataTable({name,rows,headCells}) {
     setPage(0);
   };
 
-  const handleApprove =(event)=>{
-    console.log(event)
-    setShow(false)
-  }
+
 
 
   const emptyRows =
@@ -411,15 +385,15 @@ export default function DataTable({name,rows,headCells}) {
                               id={labelId}
                               key={index}
                               scope="row"
-                              padding="none" align='left'>
-                                {dataName}
-                            </TableCell>
+                              padding="none" align={dataName === null ? 'center':'left'} className='tableRow'>
+                                {dataName || '-'}
+                              </TableCell>
                             </>
                           )
                         })
                       }
                     {
-                      name === 'Bookings' && (
+                      name === 'Class Bookings' && (
                         <>
                           {
                             show ? (
@@ -443,7 +417,7 @@ export default function DataTable({name,rows,headCells}) {
                       )
                     }
                      {
-                      name === 'Member Lists' && (
+                      name === 'Sale Plan' && (
                         <>
                           {
                             show ? (

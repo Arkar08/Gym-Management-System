@@ -46,7 +46,7 @@ const Booking = () => {
       id: 'id',
       numeric: false,
       disablePadding: true,
-      label: 'Id',
+      label: 'ID',
     },
     {
       id: 'name',
@@ -107,7 +107,7 @@ const Booking = () => {
 
   return (
     <div className='tableContainer'>
-      <DataTable name="Bookings" rows={rows} headCells={headCells}/>
+      <DataTable name="Class Bookings" rows={rows} headCells={headCells}/>
     </div>
   )
 }

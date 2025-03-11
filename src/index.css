@@ -239,6 +239,7 @@ label{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
  }
  .schedule{
     min-width: calc(100vw - 300px);
@@ -287,6 +288,83 @@ label{
 .css-1e9ya6q-MuiTableCell-root {
     padding: 10px !important;
 }
+.loginContainer{
+    position: relative;
+}
+.login{
+    max-width: 440px;
+    width: 100%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,30%);
+    padding:20px;
+    border-radius: 5px;
+    box-shadow: 1px 2px 3px black;
+}
+.loginTextContainer{
+    width: 100%;
+    background-color: blue;
+    border-radius: 5px;
+}
+.loginText{
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+.loginBtnContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.loginBtn{
+    width: 60%;
+    background-color: blue !important;
+    color: white !important;
+}
+.third{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.line{
+    width: 15px;
+    height: 2px;
+    background-color: black;
+    margin:0px  5px;
+}
+.iconBoxContainer{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 40px;
+    margin-top: 10px;
+}
+.iconBox{
+    height: 100%;
+    width: 100%;
+    box-shadow: 1px 2px 3px black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+}
+.iconText{
+    margin-left: 10px;
+    font-weight: bold;
+}
+.tableRow{
+    text-transform: capitalize;
+}
 
  @media only screen and (max-width: 600px) {
     .sidebar{
@@ -333,6 +411,20 @@ label{
     .profileFormContainer{
         width: 100%;
         padding: 10px;
+    }
+    .login{
+        max-width: 350px;
+        width: 100%;
+    }
+    .loginText{
+        font-size: 18px;
+    }
+    .iconText{
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .iconBoxContainer{
+        grid-template-columns: repeat(3,100px);
     }
   }
 

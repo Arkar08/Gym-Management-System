@@ -11,6 +11,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { UserContext } from '../hooks/User';
 
 const style = {
   position: 'absolute',
@@ -33,10 +34,8 @@ export default function ModalBox(props) {
     const {open , handleClose,selectedName,filterOpen,filterClose,filterName} = props;
     const [role, setRole] = React.useState('');
     const [hide ,setHide] = React.useState(false)
+    const {roles,createUser,handleCreate,handleChange,handleCloseUser} = React.useContext(UserContext)
 
-  const handleChange = (event) => {
-    setRole(event.target.value);
-  };
 
   React.useEffect(()=>{
     if(window.innerWidth > 900){
@@ -50,7 +49,7 @@ export default function ModalBox(props) {
     return (
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseUser}
         aria-labelledby="parent-modal-title"
       >
         <Box  sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
@@ -59,13 +58,13 @@ export default function ModalBox(props) {
             <Grid size={6}>
               <div className='formField'>
                 <label htmlFor='name'>Name <span className='star'>*</span></label>
-                <TextField label='FullName' variant="outlined"/>
+                <TextField label='FullName' variant="outlined" autoComplete='off' value={createUser.name} name="name" onChange={handleChange}/>
               </div>
             </Grid>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="email" >Email <span className='star'>*</span></label>
-                <TextField label='Email' variant="outlined"/>
+                <TextField label='Email' variant="outlined" autoComplete='off' value={createUser.email} name="email" onChange={handleChange}/>
               </div>
             </Grid>
           </Grid>
@@ -73,7 +72,7 @@ export default function ModalBox(props) {
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="password">Password <span className='star'>*</span></label>
-                  <TextField label='Password' variant="outlined" type={hide ? 'text':'password'}/>
+                  <TextField label='Password' variant="outlined" type={hide ? 'text':'password'} autoComplete='off' value={createUser.password} name="password" onChange={handleChange}/>
                     {
                       hide ? <VisibilityIcon className='eyeIcon' onClick={() =>setHide(!hide)}/> : <VisibilityOffIcon className='eyeIcon' onClick={() =>setHide(!hide)}/>
                     }
@@ -82,7 +81,7 @@ export default function ModalBox(props) {
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Phone Number">Phone Number <span className='star'>*</span></label>
-                  <TextField label='Phone Number' variant="outlined"/>
+                  <TextField label='Phone Number' variant="outlined" autoComplete='off' type='number' value={createUser.phoneNumber} name="phoneNumber" onChange={handleChange}/>
                 </div>
               </Grid>
           </Grid>
@@ -90,32 +89,43 @@ export default function ModalBox(props) {
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Address">Address <span className='star'>*</span></label>
-                <TextField label='Address' variant="outlined"/>
+                <TextField label='Address' variant="outlined" autoComplete='off' value={createUser.address} name='address' onChange={handleChange}/>
               </div>
             </Grid>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Role">Role <span className='star'>*</span></label>
                 <Select
-                  value={role}
+                  value={createUser.roleId}
                   onChange={handleChange}
+                  name='roleId'
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                 >
                   <MenuItem value="">
                     <em>Select</em>
                   </MenuItem>
+                  {
+                    roles.map((role)=>{
+                      return (
+                        <MenuItem key={role.roleId} value={role.name}>
+                          {role.name}
+                        </MenuItem>
+                      )
+                    })
+                  }
+                  {/* {
                   <MenuItem value="Customer">Customer</MenuItem>
                   <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
+                  <MenuItem value="Admin">Admin</MenuItem>  */}
                 </Select>
               </div>
             </Grid>
           </Grid>
           <div className='btnGroup'>
-            <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose} className='btn'>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose} className='btn'>Create</Button>
+            <ButtonGroup>
+              <Button variant='contained' color='error' onClick={handleCloseUser} className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleCreate} className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -312,7 +322,7 @@ export default function ModalBox(props) {
     )
   }
 
-  if(selectedName === 'Bookings' ){
+  if(selectedName === 'Class Bookings' ){
     return (
       <Modal
         open={open}
@@ -423,7 +433,7 @@ export default function ModalBox(props) {
     )
   }
 
-  if(selectedName === 'Member Lists' ){
+  if(selectedName === 'Sale Plan' ){
     return (
       <Modal
         open={open}
@@ -593,9 +603,18 @@ export default function ModalBox(props) {
                   <MenuItem value="">
                     <em>Select</em>
                   </MenuItem>
-                  <MenuItem value="Customer">Customer</MenuItem>
+                  {
+                    roles.map((role) =>{
+                      return (
+                        <MenuItem value={role.name} key={role.roleId}>
+                          {role.name}
+                        </MenuItem>
+                      )
+                    })
+                  }
+                  {/* <MenuItem value="Customer">Customer</MenuItem>
                   <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
+                  <MenuItem value="Admin">Admin</MenuItem> */}
                 </Select>
               </div>
             </Grid>
@@ -845,7 +864,7 @@ export default function ModalBox(props) {
     )
   }
 
-  if(filterName === 'Bookings' ){
+  if(filterName === 'Class Bookings' ){
     return (
       <Modal
         open={filterOpen}
@@ -980,7 +999,7 @@ export default function ModalBox(props) {
     )
   }
 
-  if(filterName === 'Member Lists' ){
+  if(filterName === 'Sale Plan' ){
     return (
       <Modal
         open={filterOpen}

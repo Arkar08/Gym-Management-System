@@ -46,7 +46,7 @@ const RevenueReports = () => {
       id: 'id',
       numeric: false,
       disablePadding: true,
-      label: 'Id',
+      label: 'ID',
     },
     {
       id: 'name',
