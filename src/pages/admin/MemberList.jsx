@@ -1,47 +1,48 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import DataTable from '../../components/Table'
+import { SalePlanContext } from '../../hooks/SalePlanContext';
 
 const MemberList = () => {
 
-  function createData(id, name, plan, accessType, price, startDate,endDate,training,payment,status,createdDate,updatedDate) {
-    return {
-      id,
-      name,
-      plan,
-      accessType,
-      price,
-      startDate,
-      endDate,
-      training,
-      payment,
-      status,
-      createdDate,
-      updatedDate
-    };
-  }
+  // function createData(id, name, plan, accessType, price, startDate,endDate,trainer,payment,status,createdDate,updatedDate) {
+  //   return {
+  //     id,
+  //     name,
+  //     plan,
+  //     accessType,
+  //     price,
+  //     startDate,
+  //     endDate,
+  //     trainer,
+  //     payment,
+  //     status,
+  //     createdDate,
+  //     updatedDate
+  //   };
+  // }
   
-  const rows = [
-    createData(1, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(2, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(3, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(4, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(5, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(6, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(7, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(8, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(9, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(10, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(11, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(12, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(13, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(14, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(15, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(16, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(17, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(18, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(19, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-    createData(20, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
-  ];
+  // const rows = [
+  //   createData(1, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(2, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(3, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(4, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(5, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(6, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(7, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(8, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(9, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(10, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(11, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(12, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(13, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(14, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(15, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(16, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(17, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(18, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(19, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  //   createData(20, 'arkar','Basic','monthly',29.99,"06-03-2025","06-04-2025","kyawkyaw","Accept","06-03-2025", " - "),
+  // ];
 
   const headCells = [
     {
@@ -63,7 +64,7 @@ const MemberList = () => {
       label: 'Plan Name',
     },
     {
-      id: 'training',
+      id: 'trainer',
       numeric: false,
       disablePadding: true,
       label: 'Traing By Trainer',
@@ -118,10 +119,20 @@ const MemberList = () => {
     },
   ];
 
+  const {error,salePlan} = useContext(SalePlanContext)
+
   return (
-    <div className='tableContainer'>
-      <DataTable name="Sale Plan" rows={rows} headCells={headCells}/>
-    </div>
+   <>
+      {
+        error ? (
+          <div>{error}</div>
+        ):(
+          <div className='tableContainer'>
+            <DataTable name="Sale Plan" rows={salePlan} headCells={headCells}/>
+          </div>
+        )
+      }
+   </>
   )
 }
 

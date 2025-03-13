@@ -1,45 +1,47 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import DataTable from '../../components/Table'
+import { ReportContext } from '../../hooks/ReportContext';
 
 const RevenueReports = () => {
 
   
-  function createData(id, name, classlist, training, paymentType,packages, total,createdDate) {
-    return {
-      id,
-      name,
-      classlist,
-      training,
-      paymentType,
-      packages,
-      total,
-      createdDate
-    };
-  }
+  // function createData(id, name, classList, trainer, paymentType,planList,packages, total,createdDate) {
+  //   return {
+  //     id,
+  //     name,
+  //     classList,
+  //     trainer,
+  //     paymentType,
+  //     packages,
+  //     total,
+  //     planList,
+  //     createdDate
+  //   };
+  // }
   
-  const rows = [
-      createData(1,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(2,'arkar','-','kyawkyaw','cash','member',10000,'06-03-2025'),
-      createData(3,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(4,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(5,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(6,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(7,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(8,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(9,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(10,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(11,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(12,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(13,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(14,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(15,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(16,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(17,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(18,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(19,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(20,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-      createData(21,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
-  ];
+  // const rows = [
+  //     createData(1,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(2,'arkar','-','kyawkyaw','cash','member',10000,'06-03-2025'),
+  //     createData(3,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(4,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(5,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(6,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(7,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(8,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(9,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(10,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(11,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(12,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(13,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(14,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(15,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(16,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(17,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(18,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(19,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(20,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  //     createData(21,'arkar','yoga','kyawkyaw','cash','booking',10000,'06-03-2025'),
+  // ];
 
   const headCells = [
     {
@@ -55,13 +57,19 @@ const RevenueReports = () => {
       label: 'Customer Name',
     },
     {
-      id: 'classlist',
+      id: 'classList',
       numeric: false,
       disablePadding: true,
       label: 'Class Name',
     },
     {
-      id: 'training',
+      id: 'planList',
+      numeric: false,
+      disablePadding: true,
+      label: 'Plan Name',
+    },
+    {
+      id: 'trainer',
       numeric: false,
       disablePadding: true,
       label: 'Training By Trainer',
@@ -92,10 +100,20 @@ const RevenueReports = () => {
     },
   ];
 
+  const {error,report} = useContext(ReportContext)
+
   return (
-    <div className='tableContainer'>
-        <DataTable name="Report" rows={rows} headCells={headCells}/>
-    </div>
+    <>
+      {
+        error ? (
+            <div>{error}</div>
+        ):(
+          <div className='tableContainer'>
+            <DataTable name="Report" rows={report} headCells={headCells}/>
+          </div>
+        )
+      }
+    </>
   )
 }
 
