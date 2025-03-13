@@ -1,14 +1,19 @@
 import { Button, ButtonGroup } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import supabase from '../../superbase/superbase'
 
 const Logout = () => {
 
   const navigate = useNavigate()
 
-  const logout = () =>{
+  const logout = async() =>{
+    const { error } = await supabase.auth.signOut()
+    if(error !== null){
+      alert(error.message)
+    }
     navigate('/auth/login')
-    localStorage.removeItem("login")
+    localStorage.removeItem("token")
   }
 
   return (

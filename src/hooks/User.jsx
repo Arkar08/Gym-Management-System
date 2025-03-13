@@ -70,23 +70,43 @@ const UserProvider  = ({children}) =>{
       };
 
     const handleCreate = async() =>{
-        const {data:User,error} = await supabase.from("User").insert([createUser])
-        setError(error)
-        setSelectedName("")
-        setOpen(true)
-        if(User === null && error === null){
-            setCreateUser({
-                name:"",
-                email:"",
-                password:"",
-                phoneNumber:"",
-                address:"",
-                roleId:"",
-                createdDate:""
-            })
-            alert("create User successfully")
-            const{data:User} = await supabase.from("User").select("*")
-            setUsers(User)
+        try{
+            const {data:User,error} = await supabase.from("User").insert([createUser])
+            setError(error)
+            setSelectedName("")
+            setOpen(true)
+            if(User === null && error === null){
+                setCreateUser({
+                    name:"",
+                    email:"",
+                    password:"",
+                    phoneNumber:"",
+                    address:"",
+                    roleId:"",
+                    createdDate:""
+                })
+                alert("create User successfully")
+                const{data:User} = await supabase.from("User").select("*")
+                setUsers(User)
+                const { data, error } = await supabase.auth.signUp({
+                    email: createUser.email,
+                    password: createUser.password,
+                    options: {
+                        data: {
+                          userRole: createUser.roleId,
+                        }
+                    }
+                })
+                if(data !== null){
+                    alert(data)
+                }
+                if(error !== null){
+                    alert(error.message)
+                }
+              
+            }
+        }catch(error){
+            alert(error.message)
         }
     }
 

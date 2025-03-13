@@ -11,7 +11,7 @@ const Main = () => {
   const [active , setActive] = useState(false)
 
   useEffect(()=>{
-    const login = localStorage.getItem("login")
+    const login = localStorage.getItem("token")
     if(login === 'admin'){
       setData(dummy)
     }else if(login === 'trainer'){
