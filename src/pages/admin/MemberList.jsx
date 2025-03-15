@@ -125,7 +125,7 @@ const MemberList = () => {
    <>
       {
         error ? (
-          <div>{error}</div>
+          <div>{error.message}</div>
         ):(
           <div className='tableContainer'>
             <DataTable name="Sale Plan" rows={salePlan} headCells={headCells}/>

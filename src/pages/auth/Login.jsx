@@ -41,6 +41,8 @@ const Login = () => {
       navigate("/dashboard")
     }else if(token === 'trainer'){
       navigate("/trainer/dashboard")
+    }else{
+      navigate("/auth/login")
     }
     if(error || data.session === null){
       navigate("/auth/login")

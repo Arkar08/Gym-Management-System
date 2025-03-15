@@ -71,11 +71,11 @@ const UserProvider  = ({children}) =>{
 
     const handleCreate = async() =>{
         try{
-            const {data:User,error} = await supabase.from("User").insert([createUser])
+            const {data:User,error} = await supabase.from("User").insert([createUser]).select()
             setError(error)
             setSelectedName("")
             setOpen(true)
-            if(User === null && error === null){
+            if(User === null || error === null){
                 setCreateUser({
                     name:"",
                     email:"",
@@ -104,6 +104,9 @@ const UserProvider  = ({children}) =>{
                     alert(error.message)
                 }
               
+            }
+            if(error !== null){
+                alert(error.message)
             }
         }catch(error){
             alert(error.message)

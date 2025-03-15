@@ -106,7 +106,7 @@ const RevenueReports = () => {
     <>
       {
         error ? (
-            <div>{error}</div>
+            <div>{error.message}</div>
         ):(
           <div className='tableContainer'>
             <DataTable name="Report" rows={report} headCells={headCells}/>

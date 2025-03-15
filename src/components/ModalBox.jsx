@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Grid from '@mui/material/Grid2';
-import { Button, ButtonGroup, TextField } from '@mui/material';
+import { Button, ButtonGroup, Menu, TextField } from '@mui/material';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -12,6 +12,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { UserContext } from '../hooks/User';
+import { ClassContext } from '../hooks/ClassContext';
+import Checkbox from '@mui/material/Checkbox';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import ListItemText from '@mui/material/ListItemText';
+import { PlanContext } from '../hooks/PlanContext';
+import { BookingContext } from '../hooks/BookingContext';
+import { SalePlanContext } from '../hooks/SalePlanContext';
 
 const style = {
   position: 'absolute',
@@ -27,6 +34,17 @@ const style = {
   borderRadius: '10px'
 };
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
 
 export default function ModalBox(props) {
 
@@ -34,10 +52,12 @@ export default function ModalBox(props) {
     const {open , handleClose,selectedName,filterOpen,filterClose,filterName} = props;
     const [role, setRole] = React.useState('');
     const [hide ,setHide] = React.useState(false)
-    const {roles,createUser,handleCreate,handleChange,handleCloseUser,trainer,customer} = React.useContext(UserContext)
-
-
     
+    const {roles,createUser,handleCreate,handleChange,handleCloseUser,trainer,customer} = React.useContext(UserContext)
+    const {createClass,handleClassChange,createClassChange,handleCloseClass,daysType} = React.useContext(ClassContext)
+    const {durationMonths,type,createPlan,handlePlanChange,handleCreatePlan,handlePlanClose}  = React.useContext(PlanContext)
+    const{selectTrainer,handleSelect,trainerClass,handleBookingChange,createBooking,handleBookingCreate,handleBookingClose,handleDoubleBookingChange,totalAmount} = React.useContext(BookingContext)
+    const {createSale,handleSelectTrainer,selectTrainers,planList,handleDoublePlanChange,totalAmounts,accessTypeName,handleSaleChange,handleSaleClose,handleSaleSave} = React.useContext(SalePlanContext)
 
 
   React.useEffect(()=>{
@@ -140,7 +160,7 @@ export default function ModalBox(props) {
     return (
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseClass}
         aria-labelledby="parent-modal-title"
       >
         <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
@@ -149,15 +169,16 @@ export default function ModalBox(props) {
             <Grid size={6}>
               <div className='formField'>
                 <label htmlFor='Class Name'>Class Name <span className='star'>*</span></label>
-                <TextField label='ClassName' variant="outlined"/>
+                <TextField label='ClassName' variant="outlined" value={createClass.className} name="className" onChange={handleClassChange} autoComplete='off'/>
               </div>
             </Grid>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Select Trainer" >Select Trainer <span className='star'>*</span></label>
                 <Select
-                  value={role}
-                  onChange={handleChange}
+                  value={createClass.trainer}
+                  onChange={handleClassChange}
+                  name='trainer'
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                 >
@@ -184,17 +205,13 @@ export default function ModalBox(props) {
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Start Time">Start Time <span className='star'>*</span></label>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <TimePicker label="Start Time" />
-                  </LocalizationProvider>
+                  <input type="time" placeholder='Start Time' className='inputTime' value={createClass.startTime} name='startTime'  min="09:00" max="18:00" required onChange={handleClassChange}/>
                 </div>
               </Grid>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="End Time ">End Time <span className='star'>*</span></label>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <TimePicker label="End Time" />
-                  </LocalizationProvider>
+                  <input type="time" placeholder='End Time' className='inputTime' value={createClass.endTime} name='endTime' min="09:00" max="18:00" required onChange={handleClassChange}/>
                 </div>
               </Grid>
           </Grid>
@@ -202,15 +219,30 @@ export default function ModalBox(props) {
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Days">Days <span className='star'>*</span></label>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker label="Basic date picker" />
-                </LocalizationProvider>
+                <Select
+                  labelId="demo-multiple-checkbox-label"
+                  id="demo-multiple-checkbox"
+                  multiple
+                  value={createClass.days}
+                  onChange={handleClassChange}
+                  name='days'
+                  input={<OutlinedInput label="Tag" />}
+                  renderValue={(selected) => selected.join(', ')}
+                  MenuProps={MenuProps}
+                >
+                {daysType.map((days) => (
+                  <MenuItem key={days} value={days}>
+                    <Checkbox checked={createClass.days.includes(days)} />
+                    <ListItemText primary={days} />
+                  </MenuItem>
+                ))}
+                </Select>
               </div>
             </Grid>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Capacity">Capacity <span className='star'>*</span></label>
-                <TextField label='Capacity' variant="outlined" type='number'/>
+                <TextField label='Capacity' variant="outlined" type='number' value={createClass.capacity} name='capacity' onChange={handleClassChange} autoComplete='off'/>
               </div>
             </Grid>
           </Grid>
@@ -218,20 +250,20 @@ export default function ModalBox(props) {
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Price">Price <span className='star'>*</span></label>
-                <TextField label='Price' variant="outlined" type='number'/>
+                <TextField label='Price' variant="outlined" type='number' value={createClass.price} name='price'onChange={handleClassChange} autoComplete='off'/>
               </div>
             </Grid>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Notes">Notes <span className='star'>*</span></label>
-                <TextField label='Notes' variant="outlined" />
+                <TextField label='Notes' variant="outlined" value={createClass.notes} name='notes'onChange={handleClassChange} autoComplete='off'/>
               </div>
             </Grid>
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose}  className='btn'>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose}  className='btn'>Create</Button>
+              <Button variant='contained' color='error' onClick={handleCloseClass}  className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={createClassChange}  className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -243,7 +275,7 @@ export default function ModalBox(props) {
     return (
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handlePlanClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
@@ -253,24 +285,31 @@ export default function ModalBox(props) {
             <Grid size={6}>
               <div className='formField'>
                 <label htmlFor='Plan Name'>Plan Name <span className='star'>*</span></label>
-                <TextField label='Plan Name' variant="outlined"/>
+                <TextField label='Plan Name' variant="outlined" autoComplete='off' value={createPlan.planName} name='planName' onChange={handlePlanChange}/>
               </div>
             </Grid>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Trainer" >Trainer <span className='star'>*</span></label>
                 <Select
-                  value={role}
-                  onChange={handleChange}
+                  value={createPlan.trainer}
+                  onChange={handlePlanChange}
+                  name='trainer'
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                 >
                   <MenuItem value="">
                     <em>Select</em>
                   </MenuItem>
-                  <MenuItem value="Customer">Customer</MenuItem>
-                  <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
+                  {
+                    trainer.map((train)=>{
+                      return(
+                        <MenuItem key={train.id} value={train.name}>
+                          {train.name}
+                        </MenuItem>
+                      )
+                    })
+                  }
                 </Select>
               </div>
             </Grid>
@@ -280,24 +319,48 @@ export default function ModalBox(props) {
                 <div className='formField'>
                   <label htmlFor="Access Type">Access Type <span className='star'>*</span></label>
                   <Select
-                  value={role}
-                  onChange={handleChange}
+                  value={createPlan.accessType}
+                  onChange={handlePlanChange}
+                  name='accessType'
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                   >
                     <MenuItem value="">
                       <em>Select</em>
                     </MenuItem>
-                    <MenuItem value="Customer">Customer</MenuItem>
-                    <MenuItem value="Trainer">Trainer</MenuItem>
-                    <MenuItem value="Admin">Admin</MenuItem>
+                    {
+                      type.map((typ)=>{
+                        return(
+                          <MenuItem key={typ.id} value={typ.name}>{typ.name}</MenuItem>
+                        )
+                      })
+                    }
                   </Select>
                 </div>
               </Grid>
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Duration">Duration<span className='star'>*</span></label>
-                  <TextField label='Duration' variant="outlined"/>
+                  <Select
+                  value={createPlan.duration}
+                  onChange={handlePlanChange}
+                  name='duration'
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>Select</em>
+                    </MenuItem>
+                    {
+                        durationMonths.map((duration)=>{
+                          return(
+                            <MenuItem key={duration} value={duration}>
+                              {duration}
+                            </MenuItem>
+                          )
+                        })
+                    }
+                  </Select>
                 </div>
               </Grid>
           </Grid>
@@ -305,13 +368,13 @@ export default function ModalBox(props) {
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Capacity">Capacity <span className='star'>*</span></label>
-                <TextField label='Capacity' variant="outlined"/>
+                <TextField label='Capacity' variant="outlined" autoComplete='off' type='number' value={createPlan.capacity} name='capacity' onChange={handlePlanChange}/>
               </div>
             </Grid>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Price">Price <span className='star'>*</span></label>
-                <TextField label='Price' variant="outlined"/>
+                <TextField label='Price' variant="outlined" autoComplete='off' type='number' value={createPlan.price} name='price' onChange={handlePlanChange}/>
               </div>
             </Grid>
           </Grid>
@@ -319,14 +382,14 @@ export default function ModalBox(props) {
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Features">Features <span className='star'>*</span></label>
-                <TextField label='Features' variant="outlined"/>
+                <TextField label='Features' variant="outlined" autoComplete='off' value={createPlan.features} name='features' onChange={handlePlanChange}/>
               </div>
             </Grid>
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose}  className='btn'>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose}  className='btn'>Create</Button>
+              <Button variant='contained' color='error' onClick={handlePlanClose}  className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleCreatePlan}  className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -338,7 +401,7 @@ export default function ModalBox(props) {
     return (
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleBookingClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
@@ -349,17 +412,15 @@ export default function ModalBox(props) {
               <div className='formField'>
                 <label htmlFor='Customer Name'>Customer Name <span className='star'>*</span></label>
                 <Select
-                  value={role}
-                  onChange={handleChange}
+                  value={createBooking.name}
+                  onChange={handleBookingChange}
+                  name='name'
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                 >
                   <MenuItem value="">
                     <em>Select</em>
                   </MenuItem>
-                  {/* <MenuItem value="Customer">Customer</MenuItem>
-                  <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem> */}
                   {
                     customer.map((cus)=>{
                       return (
@@ -376,22 +437,20 @@ export default function ModalBox(props) {
                 <div className='formField'>
                   <label htmlFor="Trainer">Trainer <span className='star'>*</span></label>
                   <Select
-                  value={role}
-                  onChange={handleChange}
+                  value={selectTrainer}
+                  onChange={handleSelect}
+                  name='trainer'
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                   >
                     <MenuItem value="">
                       <em>Select</em>
                     </MenuItem>
-                    {/* <MenuItem value="Customer">Customer</MenuItem>
-                    <MenuItem value="Trainer">Trainer</MenuItem>
-                    <MenuItem value="Admin">Admin</MenuItem> */}
                     {
-                      trainer.map((train)=>{
+                      trainer?.map((trainer)=>{
                         return(
-                          <MenuItem key={train.id} value={train.name}>
-                            {train.name}
+                          <MenuItem key={trainer.id} value={trainer.name}>
+                            {trainer.name}
                           </MenuItem>
                         )
                       })
@@ -401,44 +460,46 @@ export default function ModalBox(props) {
               </Grid>
           </Grid>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-              <Grid size={6}>
+            <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor='Class Name'>Class Name <span className='star'>*</span></label>
                   <Select
-                    value={role}
-                    onChange={handleChange}
-                    displayEmpty
-                    inputProps={{ 'aria-label': 'Without label' }}
-                  >
-                    <MenuItem value="">
-                      <em>Select</em>
-                    </MenuItem>
-                    <MenuItem value="Customer">Customer</MenuItem>
-                    <MenuItem value="Trainer">Trainer</MenuItem>
-                    <MenuItem value="Admin">Admin</MenuItem>
-                  </Select>
+                  labelId="demo-multiple-checkbox-label"
+                  id="demo-multiple-checkbox"
+                  multiple
+                  value={createBooking.classlist}
+                  onChange={handleDoubleBookingChange}
+                  name='classlist'
+                  input={<OutlinedInput label="Tag" />}
+                  renderValue={(selected) => selected.join(', ')}
+                  MenuProps={MenuProps}
+                  disabled = {trainerClass.length === 0}
+                >
+                {trainerClass?.map((classs) => (
+                  <MenuItem key={classs.id} value={classs.className}>
+                    <Checkbox checked={createBooking.classlist.includes(classs.className)} />
+                    <ListItemText primary={classs.className} />
+                  </MenuItem>
+                ))}
+                </Select>
                 </div>
               </Grid>
               <Grid size={6}>
                 <div className='formField'>
-                  <label htmlFor="Class Count">Class Count <span className='star'>*</span></label>
-                  <TextField label='Class Count' variant="outlined" type='number'/>
+                  <label htmlFor="Price">Price <span className='star'>*</span></label>
+                  <TextField label='Price' variant="outlined" type='number'  autoComplete='off' value={totalAmount} disabled/>
                 </div>
               </Grid>
           </Grid>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            <Grid size={6}>
-               <div className='formField'>
-                <label htmlFor="Price">Price <span className='star'>*</span></label>
-                <TextField label='Price' variant="outlined" type='number'/>
-              </div>
-            </Grid>
+            
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Payment Type">Payment Type <span className='star'>*</span></label>
                 <Select
-                  value={role}
-                  onChange={handleChange}
+                  value={createBooking.payment}
+                  name='payment'
+                  onChange={handleBookingChange}
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                 >
@@ -455,8 +516,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose}  className='btn'>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose}  className='btn'>Create</Button>
+              <Button variant='contained' color='error' onClick={handleBookingClose}  className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleBookingCreate}  className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -468,73 +529,90 @@ export default function ModalBox(props) {
     return (
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleSaleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
         <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
-          <h2 className='userCreate' id="parent-modal-title">Create MemberList</h2>
-          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-            <Grid size={6}>
-              <div className='formField'>
-                <label htmlFor='Customer Name'>Customer Name <span className='star'>*</span></label>
-                <Select
-                  value={role}
-                  onChange={handleChange}
-                  displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
-                >
-                  <MenuItem value="">
-                    <em>Select</em>
-                  </MenuItem>
-                  <MenuItem value="Customer">Customer</MenuItem>
-                  <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
-                </Select>
-              </div>
-            </Grid>
-            <Grid size={6}>
-               <div className='formField'>
-                <label htmlFor="Plan Name" >Plan Name <span className='star'>*</span></label>
-                <Select
-                  value={role}
-                  onChange={handleChange}
-                  displayEmpty
-                  inputProps={{ 'aria-label': 'Without label' }}
-                >
-                  <MenuItem value="">
-                    <em>Select</em>
-                  </MenuItem>
-                  <MenuItem value="Customer">Customer</MenuItem>
-                  <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>
-                </Select>
-              </div>
-            </Grid>
-          </Grid>
+          <h2 className='userCreate' id="parent-modal-title"> Create Sale Plan</h2>
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
               <Grid size={6}>
                 <div className='formField'>
-                  <label htmlFor="Trainer">Trainer <span className='star'>*</span></label>
+                  <label htmlFor='Customer Name'>Customer Name <span className='star'>*</span></label>
                   <Select
-                    value={role}
-                    onChange={handleChange}
+                    value={createSale.customerName}
+                    onChange={handleSaleChange}
+                    name='customerName'
                     displayEmpty
                     inputProps={{ 'aria-label': 'Without label' }}
                   >
                     <MenuItem value="">
                       <em>Select</em>
                     </MenuItem>
-                    <MenuItem value="Customer">Customer</MenuItem>
-                    <MenuItem value="Trainer">Trainer</MenuItem>
-                    <MenuItem value="Admin">Admin</MenuItem>
+                    {
+                      customer.map((cus)=>{
+                        return (
+                          <MenuItem key={cus.id} value={cus.name}>
+                            {cus.name}
+                          </MenuItem>
+                        )
+                      })
+                    }
                   </Select>
                 </div>
               </Grid>
               <Grid size={6}>
                 <div className='formField'>
+                  <label htmlFor="Trainer">Trainer <span className='star'>*</span></label>
+                  <Select
+                    value={selectTrainers}
+                    onChange={handleSelectTrainer}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                  >
+                    <MenuItem value="">
+                      <em>Select</em>
+                    </MenuItem>
+                    {
+                      trainer.map((train)=>{
+                        return(
+                          <MenuItem key={train.id} value={train.name}>{train.name}</MenuItem>
+                        )
+                      })
+                    }
+                  </Select>
+                </div>
+              </Grid>
+          </Grid>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <Grid size={6}>
+                <div className='formField'>
+                  <label htmlFor="Plan Name" >Plan Name <span className='star'>*</span></label>
+                  <Select
+                  labelId="demo-multiple-checkbox-label"
+                  id="demo-multiple-checkbox"
+                  multiple
+                  value={createSale.planName}
+                  onChange={handleDoublePlanChange}
+                  name='planName'
+                  input={<OutlinedInput label="Tag" />}
+                  renderValue={(selected) => selected.join(', ')}
+                  MenuProps={MenuProps}
+                  disabled = {planList.length === 0}
+                >
+                  {planList?.map((plan) => (
+                    <MenuItem key={plan.id} value={plan.planName}>
+                      <Checkbox checked={createSale.planName.includes(plan.planName)} />
+                      <ListItemText primary={plan.planName} />
+                    </MenuItem>
+                  ))}
+                </Select>
+                </div>
+              </Grid>
+              <Grid size={6}>
+                <div className='formField'>
                   <label htmlFor="Access Type">Access Type <span className='star'>*</span></label>
-                  <TextField label='Access Type' variant="outlined"/>
+                  <TextField label='Access Type' variant="outlined" value={accessTypeName} disabled/>
                 </div>
               </Grid>
           </Grid>
@@ -543,7 +621,7 @@ export default function ModalBox(props) {
                <div className='formField'>
                 <label htmlFor="Start Date">Start Date <span className='star'>*</span></label>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker label="Start Date" />
+                  <DatePicker label="Start Date" value={createSale.startDate} disabled/>
                 </LocalizationProvider>
               </div>
             </Grid>
@@ -551,7 +629,7 @@ export default function ModalBox(props) {
                <div className='formField'>
                 <label htmlFor="End Date">End Date <span className='star'>*</span></label>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker label="End Date" />
+                  <DatePicker label="End Date"  value={createSale.endDate} disabled/>
                 </LocalizationProvider>
               </div>
             </Grid>
@@ -560,14 +638,34 @@ export default function ModalBox(props) {
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Price">Price <span className='star'>*</span></label>
-                <TextField label='Price' variant="outlined"/>
+                <TextField label='Price' variant="outlined" value={totalAmounts} disabled/>
+              </div>
+            </Grid>
+            <Grid size={6}>
+               <div className='formField'>
+                <label htmlFor="Payment Type">Payment Type <span className='star'>*</span></label>
+                <Select
+                  value={createSale.payment}
+                  onChange={handleSaleChange}
+                  name='payment'
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                >
+                  <MenuItem value="">
+                    <em>Select</em>
+                  </MenuItem>
+                  <MenuItem value="Cash">Cash</MenuItem>
+                  <MenuItem value="KBZ Pay">KBZ Pay</MenuItem>
+                  <MenuItem value="Wave Pay">Wave Pay</MenuItem>
+                  <MenuItem value="OK $">OK $</MenuItem>
+                </Select>
               </div>
             </Grid>
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup >
-              <Button variant='contained' color='error' onClick={handleClose}  className='btn'>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleClose}  className='btn'>Create</Button>
+              <Button variant='contained' color='error' onClick={handleSaleClose}  className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleSaleSave}  className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>

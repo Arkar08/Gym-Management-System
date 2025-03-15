@@ -108,7 +108,7 @@ const MembershipPlan = () => {
   return (
     <>
       {error ? (
-        <div>{error}</div>
+        <div>{error.message}</div>
       ):(
         <div className='tableContainer'>
           <DataTable name="Membership Plan" rows={plan} headCells={headCells}/>
