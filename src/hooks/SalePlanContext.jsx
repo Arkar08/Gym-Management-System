@@ -27,6 +27,14 @@ const SalePlanProvider = ({children})=>{
         endDate:dayjs(Date.now()),
         payment:"",
     })
+    const [report,setReport] = useState({
+        customerName:"",
+        planList:"",
+        trainer:"",
+        packages:"",
+        paymentType:"",
+        total:0,
+    })
 
     useEffect(()=>{
         getSale()
@@ -102,6 +110,12 @@ const SalePlanProvider = ({children})=>{
         createSale.price = totalAmounts;
         createSale.trainer = selectTrainers;
         createSale.accessType = accessTypeName;
+        report.customerName = createSale.customerName,
+        report.planList=createSale.planName,
+        report.trainer=createSale.trainer,
+        report.packages='Sale Plan',
+        report.paymentType=createSale.payment,
+        report.total=createSale.price
         try {
             const {data:Plans , error} = await supabase.from("salePlan").insert([createSale]).select()
             setSelectedName("")
@@ -117,10 +131,19 @@ const SalePlanProvider = ({children})=>{
                     endDate:dayjs(Date.now()),
                     payment:"",
                 })
+                setReport({
+                    customerName:"",
+                    planList:"",
+                    trainer:"",
+                    packages:"",
+                    paymentType:"",
+                    total:0,
+                })
                 setTotalAmounts(0)
                 setAccessTypeName('')
                 setSelectTrainers('')
                 alert("create Sale Plan successfully")
+                await supabase.from("Report").insert([report]).select()
                 const{data:SalePlan} = await supabase.from("salePlan").select("*")
                 setSalePlan(SalePlan)  
             }

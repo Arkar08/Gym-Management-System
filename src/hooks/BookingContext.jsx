@@ -23,6 +23,14 @@ const BookingProvider = ({children}) =>{
         payment:"",
         price:0
     })
+    const [report,setReport] = useState({
+        customerName:"",
+        classList:"",
+        trainer:"",
+        packages:"",
+        paymentType:"",
+        total:0,
+    })
 
     useEffect(()=>{
         getBooking()
@@ -74,8 +82,14 @@ const BookingProvider = ({children}) =>{
         createBooking.trainer = selectTrainer;
         createBooking.classCount = createBooking.classlist.length;
         createBooking.price = totalAmount;
+        report.customerName = createBooking.name,
+        report.classList=createBooking.classlist,
+        report.trainer=createBooking.trainer,
+        report.packages='Booking',
+        report.paymentType=createBooking.payment,
+        report.total=createBooking.price
         try {
-            const {data:Bookings , error} = await supabase.from("Bookings").insert([createBooking]).select()
+            const {data:Bookings,error} = await supabase.from("Bookings").insert([createBooking]).select()
             setSelectedName("")
             setOpen(true)
             if(Bookings === null || error === null){
@@ -87,12 +101,21 @@ const BookingProvider = ({children}) =>{
                     payment:"",
                     price:""
                 })
+                setReport({
+                    customerName:"",
+                    classList:"",
+                    trainer:"",
+                    packages:"",
+                    paymentType:"",
+                    total:0,
+                })
                 setSelectTrainer("")
                 setTrainerClass([])
                 setTotalAmount(0)
                 alert("create Booking successfully")
+                await supabase.from("Report").insert([report]).select()
                 const{data:Booking} = await supabase.from("Bookings").select("*")
-                setBookings(Booking)  
+                setBookings(Booking) 
             }
             if(error !== null){
                 alert(error.message)

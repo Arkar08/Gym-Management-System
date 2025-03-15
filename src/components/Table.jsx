@@ -109,14 +109,6 @@ function EnhancedTableHead(props) {
   );
 }
 
-// EnhancedTableHead.propTypes = {
-//   numSelected: PropTypes.number.isRequired,
-//   onRequestSort: PropTypes.func.isRequired,
-//   onSelectAllClick: PropTypes.func.isRequired,
-//   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
-//   orderBy: PropTypes.string.isRequired,
-//   rowCount: PropTypes.number.isRequired,
-// };
 
 function EnhancedTableToolbar(props) {
   const { numSelected,name,handleOpen,allData,filterClick } = props;
@@ -259,9 +251,6 @@ function EnhancedTableToolbar(props) {
   );
 }
 
-// EnhancedTableToolbar.propTypes = {
-//   numSelected: PropTypes.number.isRequired,
-// };
 
 export default function DataTable({name,rows,headCells}) {
   const [order, setOrder] = React.useState('asc');
