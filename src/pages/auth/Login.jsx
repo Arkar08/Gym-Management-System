@@ -33,14 +33,14 @@ const Login = () => {
       password: loginDetails.password,
     })
     if(data.session !== null){
-      navigate("/dashboard")
+      navigate("/auth/login")
       localStorage.setItem("token",data.user.identities[0].identity_data.userRole)
     }
     const token = localStorage.getItem("token")
     if(token === 'admin'){
-      navigate("/dashboard")
+      navigate("/home/dashboard")
     }else if(token === 'trainer'){
-      navigate("/trainer/dashboard")
+      navigate("/home/trainer/dashboard")
     }else{
       navigate("/auth/login")
     }

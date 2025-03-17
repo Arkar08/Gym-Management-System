@@ -2,42 +2,42 @@
 
 const dummy = [
     {
-        path:"/dashboard",
+        path:"/home/dashboard",
         text:"Dashboard",
         icon:"dashboard"
     },
     {
-        path:"/user",
+        path:"/home/user",
         text:"User",
         icon:"person"
     },
     {
-        path:"/class",
+        path:"/home/class",
         text:"Class",
         icon:"school"
     },
     {
-        path:"/plan",
+        path:"/home/plan",
         text:"Membership Plan",
         icon:"paid"
     },
     {
-        path:"/memberlist",
+        path:"/home/memberlist",
         text:"Sale Plan",
         icon:"point_of_sale"
     },
     {
-        path:"/booking",
+        path:"/home/booking",
         text:"Class Booking",
         icon:"event_available"
     },
     {
-        path:"/report",
+        path:"/home/report",
         text:"Revenue Report",
         icon:"report"
     },
     {
-        path:"/logout",
+        path:"/home/logout",
         text:"Logout",
         icon:"logout"
     }

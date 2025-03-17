@@ -1,31 +1,31 @@
 const trainer = [
     {
-        path:"/trainer/dashboard",
+        path:"/home/trainer/dashboard",
         text:"Dashboard",
         icon:"dashboard"
     },
     {
-        path:"/trainer/member",
+        path:"/home/trainer/member",
         text:"Member List",
         icon:"list"
     },
     {
-        path:"/trainer/myschedule",
+        path:"/home/trainer/myschedule",
         text:"My Schedule",
         icon:"paid"
     },
     {
-        path:"/trainer/myclass",
+        path:"/home/trainer/myclass",
         text:"My Class",
         icon:"school"
     },
     {
-        path:"/trainer/income",
+        path:"/home/trainer/income",
         text:"Income",
         icon:"person"
     },
     {
-        path:"/logout",
+        path:"/home/logout",
         text:"Logout",
         icon:"logout"
     }
