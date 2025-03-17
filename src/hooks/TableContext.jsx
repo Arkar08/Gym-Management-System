@@ -34,16 +34,10 @@ const TableProvider = ({children}) =>{
         setOpen(false);
     };
 
-    const handleApprove =(event)=>{
-        console.log(event)
-        setShow(false)
-    }
-
-
 
 
     return (
-        <TableContext.Provider value={{selectedName,setSelectedName,open,setOpen,filterOpen,setFilterOpen,filterName,setFilterName,show,handleApprove,handleOpen,handleClose,filterClick,filterClose}}>
+        <TableContext.Provider value={{selectedName,setSelectedName,open,setOpen,filterOpen,setFilterOpen,filterName,setFilterName,show,handleOpen,handleClose,filterClick,filterClose,setShow}}>
             {children}
         </TableContext.Provider>
     )

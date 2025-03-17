@@ -25,6 +25,7 @@ import { Button,ButtonGroup } from '@mui/material';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { TableContext } from '../hooks/TableContext';
+import { SalePlanContext } from '../hooks/SalePlanContext';
 
 
 function descendingComparator(a, b, orderBy) {
@@ -260,7 +261,8 @@ export default function DataTable({name,rows,headCells}) {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
 
-  const {selectedName,open,filterOpen,filterName,show,handleApprove,handleOpen,handleClose,filterClick,filterClose} = React.useContext(TableContext)
+  const {selectedName,open,filterOpen,filterName,show,handleOpen,handleClose,filterClick,filterClose} = React.useContext(TableContext)
+  const {handleAccept} = React.useContext(SalePlanContext)
 
 
   const handleRequestSort = (event, property) => {
@@ -389,7 +391,7 @@ export default function DataTable({name,rows,headCells}) {
                             <>
                               <TableCell align='center'>
                                 <ButtonGroup variant="outlined" aria-label="Basic button group" size="small">
-                                  <Button variant="contained" color="success" className='btn' size="small" onClick={()=> handleApprove(row.id)}>Approve</Button>
+                                  <Button variant="contained" color="success" className='btn' size="small" onClick={()=> handleAccept(row.id)}>Approve</Button>
                                   <Button variant="contained" color="error" size="small" className='btn'>Reject</Button>
                                 </ButtonGroup>
                               </TableCell>
@@ -413,7 +415,7 @@ export default function DataTable({name,rows,headCells}) {
                             <>
                               <TableCell align='center'>
                                 <ButtonGroup variant="outlined" aria-label="Basic button group" size="small">
-                                  <Button variant="contained" color="success" className='btn' size="small" onClick={()=> handleApprove(row.id)}>Accept</Button>
+                                  <Button variant="contained" color="success" className='btn' size="small" onClick={()=> handleAccept(row.id)}>Accept</Button>
                                   <Button variant="contained" color="error" size="small" className='btn'>Cancel</Button>
                                 </ButtonGroup>
                               </TableCell>
