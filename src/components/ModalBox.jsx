@@ -49,7 +49,7 @@ const MenuProps = {
 export default function ModalBox(props) {
 
     const [activeModal , setActiveModal] = React.useState(false)
-    const {open , handleClose,selectedName,filterOpen,filterClose,filterName} = props;
+    const {open ,selectedName,filterOpen,filterClose,filterName} = props;
     const [role, setRole] = React.useState('');
     const [hide ,setHide] = React.useState(false)
     
@@ -131,16 +131,12 @@ export default function ModalBox(props) {
                   {
                     roles.map((role)=>{
                       return (
-                        <MenuItem key={role.roleId} value={role.name}>
+                        <MenuItem key={role.id} value={role.name}>
                           {role.name}
                         </MenuItem>
                       )
                     })
                   }
-                  {/* {
-                  <MenuItem value="Customer">Customer</MenuItem>
-                  <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem>  */}
                 </Select>
               </div>
             </Grid>
@@ -194,9 +190,6 @@ export default function ModalBox(props) {
                       )
                     })
                   }
-                  {/* <MenuItem value="Customer">Customer</MenuItem>
-                  <MenuItem value="Trainer">Trainer</MenuItem>
-                  <MenuItem value="Admin">Admin</MenuItem> */}
                 </Select>
               </div>
             </Grid>
