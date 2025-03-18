@@ -256,6 +256,7 @@ label{
  .cardBody{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 10px;
  }
  .cardHeader{
@@ -265,6 +266,14 @@ label{
  }
  .cardDate{
     font-weight: bold !important;
+    text-wrap: wrap;
+    font-size: 14px;
+    padding: 5px;
+ }
+ .cardDate1{
+    font-weight: 500 !important;
+    text-align: end;
+    padding: 5px;
  }
 
  .activeMenuName{

@@ -8,6 +8,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import supabase from '../../superbase/superbase';
 
+
 const Login = () => {
 
 
@@ -38,9 +39,12 @@ const Login = () => {
     }
     const token = localStorage.getItem("token")
     if(token === 'admin'){
-      navigate("/home/dashboard")
+      navigate("/dashboard")
+      window.location.reload()
     }else if(token === 'trainer'){
-      navigate("/home/trainer/dashboard")
+      navigate("/trainer/dashboard")
+      localStorage.setItem("email",data.user.user_metadata.email)
+      window.location.reload()
     }else{
       navigate("/auth/login")
     }
@@ -54,6 +58,8 @@ const Login = () => {
     })
   }
 
+
+ 
 
 
   return (

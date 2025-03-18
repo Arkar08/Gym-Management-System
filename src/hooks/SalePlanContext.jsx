@@ -36,6 +36,14 @@ const SalePlanProvider = ({children})=>{
         total:0,
     })
 
+    const [income,setIncome] = useState({
+        memberName:"",
+        planList:"",
+        trainer:"",
+        paymentType:"",
+        total:0,
+    })
+
     useEffect(()=>{
         getSale()
     },[])
@@ -150,23 +158,39 @@ const SalePlanProvider = ({children})=>{
         report.packages='Sale Plan',
         report.paymentType=FindIdPlan[0].payment,
         report.total=FindIdPlan[0].price
+
+
+        income.memberName = FindIdPlan[0].customerName;
+        income.planList = FindIdPlan[0].planName;
+        income.trainer = FindIdPlan[0].trainer,
+        income.paymentType =FindIdPlan[0].payment
+        income.total = Math.floor(FindIdPlan[0].price * 0.25);
+
         const updateData = {
             status:"Approve",
             updatedDate:dayjs(new Date())
         }
         const {data:SalPlan,error} = await supabase.from("salePlan").update(updateData).eq('id',event).select()
+            await supabase.from("Report").insert([report]).select()
+            await supabase.from("Income").insert([income]).select()
         if(error){
             alert(error.message)
         }
         if(SalPlan === null){
             alert('Update saleplan successfully')
-            await supabase.from("Report").insert([report]).select()
             const {error} = await supabase.from("salePlan").select("*")
             setReport({
                 customerName:"",
                 planList:"",
                 trainer:"",
                 packages:"",
+                paymentType:"",
+                total:0,
+            })
+            setIncome({
+                memberName:"",
+                planList:"",
+                trainer:"",
                 paymentType:"",
                 total:0,
             })

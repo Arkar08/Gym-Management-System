@@ -10,7 +10,6 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { UserContext } from '../hooks/User';
 import { ClassContext } from '../hooks/ClassContext';
 import Checkbox from '@mui/material/Checkbox';
@@ -50,7 +49,7 @@ export default function ModalBox(props) {
 
     const [activeModal , setActiveModal] = React.useState(false)
     const {open ,selectedName,filterOpen,filterClose,filterName} = props;
-    const [role, setRole] = React.useState('');
+    const [role] = React.useState('');
     const [hide ,setHide] = React.useState(false)
     
     const {roles,createUser,handleCreate,handleChange,handleCloseUser,trainer,customer} = React.useContext(UserContext)

@@ -1,31 +1,30 @@
-import BookingProvider from "./hooks/BookingContext"
-import ClassProvider from "./hooks/ClassContext"
-import PlanProvider from "./hooks/PlanContext"
-import ReportProvider from "./hooks/ReportContext"
-import SalePlanProvider from "./hooks/SalePlanContext"
-import TableProvider from "./hooks/TableContext"
-import UserProvider from "./hooks/User"
-import View from "./utils/View"
-
+import AdminContextProvider from "./contextProvider/AdminContextProvider";
+import TrainerContextProvider from "./contextProvider/TrainerContextProvider";
+import View from "./utils/View";
 
 function App() {
+
+  const token = localStorage.getItem("token")
+
+  if(token === 'admin'){
+    return (
+      <AdminContextProvider>
+        <View />  
+      </AdminContextProvider>    
+    )
+  }
+
+  // if(token === 'trainer'){
+  //   <TrainerContextProvider>
+  //     <View />
+  //   </TrainerContextProvider>
+  // }
+
   return (
-    <TableProvider>
-      <ReportProvider>
-        <SalePlanProvider>
-          <PlanProvider>
-            <BookingProvider>
-              <ClassProvider>
-                <UserProvider>
-                    <View />
-                </UserProvider>
-              </ClassProvider>
-            </BookingProvider>
-          </PlanProvider>
-        </SalePlanProvider>
-      </ReportProvider>
-    </TableProvider>
-  )
+    <TrainerContextProvider>
+       <View />
+    </TrainerContextProvider>
+  );
 }
 
-export default App
+export default App;

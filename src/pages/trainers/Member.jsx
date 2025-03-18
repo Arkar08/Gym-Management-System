@@ -1,36 +1,38 @@
-import DataTable from '../../components/Table';
+import { useContext } from 'react';
+import TrainerTable from '../../components/TrainerTable';
+import { MemberContext } from '../../hooks/MemberContext';
 
 
 const Member = () =>{
 
-  function createData(id, name, email, password, phoneNumber,address,createdDate,updatedDate) {
-    return {
-      id,
-      name,
-      email,
-      password,
-      phoneNumber,
-      address,
-      createdDate,
-      updatedDate
-    };
-  }
+  // function createData(id, name, email, password, phoneNumber,address,createdDate,updatedDate) {
+  //   return {
+  //     id,
+  //     name,
+  //     email,
+  //     password,
+  //     phoneNumber,
+  //     address,
+  //     createdDate,
+  //     updatedDate
+  //   };
+  // }
   
-  const rows = [
-    createData(1, 'Cupcake', 'Cupcake', 'Cupcake',4.3, 'yangon','Cupcake','Cupcake','Cupcake' ),
-    createData(2, 'Donut', 'Cupcake', 'Cupcake', 4.9, 'yangon', 'Cupcake','Cupcake','Cupcake'),
-    createData(3, 'Eclair', 'Cupcake','Cupcake',6.0, 'yangon', 'Cupcake','Cupcake','Cupcake' ),
-    createData(4, 'Frozen yoghurt', 'Cupcake', 'Cupcake', 4.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
-    createData(5, 'Gingerbread', 'Cupcake', 'Cupcake', 3.9, 'yangon', 'Cupcake','Cupcake','Cupcake'),
-    createData(6, 'Honeycomb', 'Cupcake', 'Cupcake', 6.5, 'yangon', 'Cupcake','Cupcake','Cupcake'),
-    createData(7, 'Ice cream ','sandwich', 'Cupcake', 37, 'yangon', 'Cupcake','Cupcake','Cupcake'),
-    createData(8, 'Jelly Bean', 'Cupcake', 'Cupcake', 0.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
-    createData(9, 'KitKat', 'Cupcake', 'Cupcake', 7.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
-    createData(10, 'Lollipop', 'Cupcake','Cupcake', 0.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
-    createData(11, 'Marshmallow', 'Cupcake', 'Cupcake', 81, 'yangon','Cupcake','Cupcake','Cupcake'),
-    createData(12, 'Nougat', 'Cupcake', 'Cupcake', 37.0, 'yangon','Cupcake','Cupcake','Cupcake' ),
-    createData(13, 'Oreo', 'Cupcake', 'Cupcake', 4.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
-  ];
+  // const rows = [
+  //   createData(1, 'Cupcake', 'Cupcake', 'Cupcake',4.3, 'yangon','Cupcake','Cupcake','Cupcake' ),
+  //   createData(2, 'Donut', 'Cupcake', 'Cupcake', 4.9, 'yangon', 'Cupcake','Cupcake','Cupcake'),
+  //   createData(3, 'Eclair', 'Cupcake','Cupcake',6.0, 'yangon', 'Cupcake','Cupcake','Cupcake' ),
+  //   createData(4, 'Frozen yoghurt', 'Cupcake', 'Cupcake', 4.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
+  //   createData(5, 'Gingerbread', 'Cupcake', 'Cupcake', 3.9, 'yangon', 'Cupcake','Cupcake','Cupcake'),
+  //   createData(6, 'Honeycomb', 'Cupcake', 'Cupcake', 6.5, 'yangon', 'Cupcake','Cupcake','Cupcake'),
+  //   createData(7, 'Ice cream ','sandwich', 'Cupcake', 37, 'yangon', 'Cupcake','Cupcake','Cupcake'),
+  //   createData(8, 'Jelly Bean', 'Cupcake', 'Cupcake', 0.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
+  //   createData(9, 'KitKat', 'Cupcake', 'Cupcake', 7.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
+  //   createData(10, 'Lollipop', 'Cupcake','Cupcake', 0.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
+  //   createData(11, 'Marshmallow', 'Cupcake', 'Cupcake', 81, 'yangon','Cupcake','Cupcake','Cupcake'),
+  //   createData(12, 'Nougat', 'Cupcake', 'Cupcake', 37.0, 'yangon','Cupcake','Cupcake','Cupcake' ),
+  //   createData(13, 'Oreo', 'Cupcake', 'Cupcake', 4.0, 'yangon', 'Cupcake','Cupcake','Cupcake'),
+  // ];
 
   const headCells = [
     {
@@ -83,10 +85,20 @@ const Member = () =>{
     },
   ];
 
+  const {error , memberList} = useContext(MemberContext)
+
     return(
-        <div className='tableContainer'>
-            <DataTable name="Member List" rows={rows} headCells={headCells}/>
-        </div>
+       <>
+          {
+            error ? (
+              <div>{error.message}</div>
+            ):(
+              <div className='tableContainer'>
+                  <TrainerTable name="Member List" rows={memberList} headCells={headCells}/>
+               </div>
+            )
+          }
+       </>
     )
 }
 

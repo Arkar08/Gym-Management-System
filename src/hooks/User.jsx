@@ -33,6 +33,7 @@ const UserProvider  = ({children}) =>{
         getCustomer()
     },[])
 
+
     const getUser = async() =>{
         const { data: User,error } = await supabase
         .from('User')

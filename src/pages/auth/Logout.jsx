@@ -14,6 +14,7 @@ const Logout = () => {
     }
     navigate('/auth/login')
     localStorage.removeItem("token")
+    localStorage.removeItem("sb-xhlxxupjsinesrueccyo-auth-token")
   }
 
   return (
