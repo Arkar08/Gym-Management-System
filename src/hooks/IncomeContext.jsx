@@ -24,7 +24,7 @@ const IncomeProvider = ({children})=>{
     }
 
     const getIncome = async (name)=>{
-        const {data:Income,error} = await supabase.from("Income").select("*").eq("trainer",name)
+        const {data:Income,error} = await supabase.from("Income").select("*").eq("trainer",name).order('createdDate', { ascending: false })
         const data = Income.map((money)=>{
             const obj = {...money}
             delete obj.trainer;

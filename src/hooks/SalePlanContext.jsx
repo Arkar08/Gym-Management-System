@@ -11,7 +11,7 @@ export const SalePlanContext = createContext()
 const SalePlanProvider = ({children})=>{
 
     const [salePlan , setSalePlan] = useState([])
-    const {setOpen,setSelectedName,setShow} = useContext(TableContext)
+    const {setOpen,setSelectedName} = useContext(TableContext)
     const [selectTrainers,setSelectTrainers] = useState('')
     const [totalAmounts , setTotalAmounts] = useState(0)
     const [planList ,setPlanList] = useState([])
@@ -49,7 +49,7 @@ const SalePlanProvider = ({children})=>{
     },[])
 
     const getSale = async() =>{
-        const {data:Sale , error} = await supabase.from("salePlan").select("*")
+        const {data:Sale , error} = await supabase.from("salePlan").select("*").order('createdDate', { ascending: false })
         setError(error)
         setSalePlan(Sale)
     }
@@ -138,7 +138,7 @@ const SalePlanProvider = ({children})=>{
                 setAccessTypeName('')
                 setSelectTrainers('')
                 alert("create Sale Plan successfully")
-                const{data:SalePlan} = await supabase.from("salePlan").select("*")
+                const{data:SalePlan} = await supabase.from("salePlan").select("*").order('createdDate', { ascending: false })
                 setSalePlan(SalePlan)  
             }
             if(error !== null){
@@ -150,7 +150,6 @@ const SalePlanProvider = ({children})=>{
     }
 
     const handleAccept = async(event) =>{
-        setShow(false)
         const {data:FindIdPlan} = await supabase.from("salePlan").select("*").eq("id",event)
         report.customerName = FindIdPlan[0].customerName,
         report.planList=FindIdPlan[0].planName,
@@ -167,7 +166,7 @@ const SalePlanProvider = ({children})=>{
         income.total = Math.floor(FindIdPlan[0].price * 0.25);
 
         const updateData = {
-            status:"Approve",
+            status:"Accept",
             updatedDate:dayjs(new Date())
         }
         const {data:SalPlan,error} = await supabase.from("salePlan").update(updateData).eq('id',event).select()
@@ -176,9 +175,10 @@ const SalePlanProvider = ({children})=>{
         if(error){
             alert(error.message)
         }
-        if(SalPlan === null){
-            alert('Update saleplan successfully')
-            const {error} = await supabase.from("salePlan").select("*")
+        if(SalPlan !== null){
+            alert('Accept successfully')
+            const {data:SalePlan,error} = await supabase.from("salePlan").select("*").order('updatedDate', { ascending: false })
+            setSalePlan(SalePlan)
             setReport({
                 customerName:"",
                 planList:"",
@@ -200,9 +200,28 @@ const SalePlanProvider = ({children})=>{
         }
     }
 
+    const handleCancelReject = async(event) =>{
+        const updateData = {
+            status:"Cancel",
+            updatedDate:dayjs(new Date())
+        }
+        const {data:SalPlan,error} = await supabase.from("salePlan").update(updateData).eq('id',event).select()
+        if(error){
+            alert(error.message)
+        }
+        if(SalPlan !== null){
+            alert('Reject successfully')
+            const {data:SalePlan,error} = await supabase.from("salePlan").select("*").order('updatedDate', { ascending: false })
+            setSalePlan(SalePlan)
+            if(error){
+                alert(error)
+            }
+        }
+    }
+
     return (
 
-        <SalePlanContext.Provider value={{salePlan,error,createSale,handleSelectTrainer,selectTrainers,planList,handleDoublePlanChange,totalAmounts,accessTypeName,handleSaleChange,handleSaleClose,handleSaleSave,handleAccept}}>
+        <SalePlanContext.Provider value={{salePlan,error,createSale,handleSelectTrainer,selectTrainers,planList,handleDoublePlanChange,totalAmounts,accessTypeName,handleSaleChange,handleSaleClose,handleSaleSave,handleAccept,handleCancelReject}}>
             {children}
         </SalePlanContext.Provider>
     )

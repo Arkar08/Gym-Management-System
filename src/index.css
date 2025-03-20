@@ -377,6 +377,16 @@ label{
     padding: 13px;
     border-radius: 5px;
 }
+.register{
+    text-align: center;
+    margin-top: 20px;
+}
+.registerText{
+    font-weight: bold;
+}
+.registerText:hover{
+    text-decoration: underline;
+}
 
 
  @media only screen and (max-width: 600px) {

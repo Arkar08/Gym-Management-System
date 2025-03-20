@@ -1,5 +1,5 @@
 import React, {useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button, TextField } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -99,6 +99,7 @@ const Login = () => {
               <p className='iconText'>Facebook</p>
             </div>
           </div>
+          <p className='register'>Don't have an account ? <Link to='/auth/signup' className='registerText'>Register</Link></p>
         </form>
     </div>
   )

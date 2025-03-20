@@ -35,7 +35,7 @@ const PlanProvider = ({children})=>{
 
 
     const getPlan = async() =>{
-        const {data:Plan , error} = await supabase.from("Plan").select("*")
+        const {data:Plan , error} = await supabase.from("Plan").select("*").order('createdDate', { ascending: false })
         setError(error);
         setPlan(Plan)
     }
@@ -72,7 +72,7 @@ const PlanProvider = ({children})=>{
                     features:""
                 })
                 alert("create Plan successfully")
-                const{data:Plan} = await supabase.from("Plan").select("*")
+                const{data:Plan} = await supabase.from("Plan").select("*").order('createdDate', { ascending: false })
                 setPlan(Plan)  
             }
             if(error !== null){

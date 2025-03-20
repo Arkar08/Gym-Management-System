@@ -15,7 +15,7 @@ const ReportProvider = ({children})=>{
     },[])
 
     const getReport = async()=>{
-        const {data:Reports, error} = await supabase.from("Report").select("*")
+        const {data:Reports, error} = await supabase.from("Report").select("*").order('createdDate', { ascending: false })
         setError(error)
         setReport(Reports)
     }

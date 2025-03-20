@@ -37,7 +37,7 @@ const UserProvider  = ({children}) =>{
     const getUser = async() =>{
         const { data: User,error } = await supabase
         .from('User')
-        .select('*')
+        .select('*').order('createdDate', { ascending: false })
         setError(error)
         setUsers(User);
     }

@@ -26,6 +26,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { TableContext } from '../hooks/TableContext';
 import { SalePlanContext } from '../hooks/SalePlanContext';
+import { BookingContext } from '../hooks/BookingContext';
 
 
 function descendingComparator(a, b, orderBy) {
@@ -261,8 +262,9 @@ export default function DataTable({name,rows,headCells}) {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
 
-  const {selectedName,open,filterOpen,filterName,show,handleOpen,handleClose,filterClick,filterClose} = React.useContext(TableContext)
-  const {handleAccept} = React.useContext(SalePlanContext)
+  const {selectedName,open,filterOpen,filterName,handleOpen,handleClose,filterClick,filterClose} = React.useContext(TableContext)
+  const {handleAccept,handleCancelReject} = React.useContext(SalePlanContext)
+  const {handleApprove,handleCancel} = React.useContext(BookingContext)
 
 
   const handleRequestSort = (event, property) => {
@@ -387,12 +389,12 @@ export default function DataTable({name,rows,headCells}) {
                       name === 'Class Bookings' && (
                         <>
                           {
-                            show ? (
+                            data[7] === 'Pending' ? (
                             <>
                               <TableCell align='center'>
                                 <ButtonGroup variant="outlined" aria-label="Basic button group" size="small">
-                                  <Button variant="contained" color="success" className='btn' size="small" onClick={()=> handleAccept(row.id)}>Approve</Button>
-                                  <Button variant="contained" color="error" size="small" className='btn'>Reject</Button>
+                                  <Button variant="contained" color="success" className='btn' size="small" onClick={()=> handleApprove(row.id)}>Approve</Button>
+                                  <Button variant="contained" color="error" size="small" className='btn' onClick={()=> handleCancel(row.id)}>Reject</Button>
                                 </ButtonGroup>
                               </TableCell>
                             </>
@@ -407,20 +409,21 @@ export default function DataTable({name,rows,headCells}) {
                         </>
                       )
                     }
-                     {
-                      name === 'Sale Plan' && (
+                    {
+                      name === 'Sale Plan'&& (
                         <>
                           {
-                            show ? (
+                            data[9] === 'Pending'  ? (
                             <>
                               <TableCell align='center'>
                                 <ButtonGroup variant="outlined" aria-label="Basic button group" size="small">
                                   <Button variant="contained" color="success" className='btn' size="small" onClick={()=> handleAccept(row.id)}>Accept</Button>
-                                  <Button variant="contained" color="error" size="small" className='btn'>Cancel</Button>
+                                  <Button variant="contained" color="error" size="small" className='btn' onClick={() => handleCancelReject(row.id)}>Cancel</Button>
                                 </ButtonGroup>
                               </TableCell>
                             </>
-                            ):(
+                            ):
+                             (
                               <>
                                 <TableCell align='center'>
                                   -
@@ -428,6 +431,7 @@ export default function DataTable({name,rows,headCells}) {
                               </>
                             )
                           }
+                           
                         </>
                       )
                     }

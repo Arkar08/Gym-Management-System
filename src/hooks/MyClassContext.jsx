@@ -24,7 +24,7 @@ export const MyClassProvider = ({children})=>{
     }
 
     const getClassList = async(name) =>{
-        const{data:ClassList,error} = await supabase.from("ClassTable").select("*").eq("trainer",name)
+        const{data:ClassList,error} = await supabase.from("ClassTable").select("*").eq("trainer",name).order('createdDate', { ascending: false })
         setMyClassList(ClassList)
         if(error){
             setError(error.message)

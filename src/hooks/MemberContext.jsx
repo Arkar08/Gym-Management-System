@@ -15,7 +15,7 @@ const MemberProvider = ({children})=>{
     },[])
 
     const getMember = async() =>{
-        const{data:Member ,error} = await supabase.from("User").select("*").eq("roleId","customer")
+        const{data:Member ,error} = await supabase.from("User").select("*").eq("roleId","customer").order('createdDate', { ascending: false })
         if(error){
             setError(error.message)
         }

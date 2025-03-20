@@ -37,7 +37,7 @@ const ClassProvider = ({children}) =>{
     },[])
 
     const getClass = async() =>{
-        const {data:Classes, error} = await supabase.from("ClassTable").select("*")
+        const {data:Classes, error} = await supabase.from("ClassTable").select("*").order('createdDate', { ascending: false })
         setError(error)
         setClasses(Classes)
     }
@@ -75,7 +75,7 @@ const ClassProvider = ({children}) =>{
                 notes:""
             })
             alert("create Class successfully")
-            const{data:Classes} = await supabase.from("ClassTable").select("*")
+            const{data:Classes} = await supabase.from("ClassTable").select("*").order('createdDate', { ascending: false })
             setClasses(Classes)  
         }
         if(error !== null){
