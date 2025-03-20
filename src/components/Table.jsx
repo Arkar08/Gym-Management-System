@@ -378,7 +378,7 @@ export default function DataTable({name,rows,headCells}) {
                               id={labelId}
                               key={index}
                               scope="row"
-                              padding="none" align={dataName === null ? 'center':'left'} className='tableRow'>
+                              padding="none" align='left' className='tableRow'>
                                 {Array.isArray(dataName) ? dataName.join(" , "):dataName || '-'}
                               </TableCell>
                             </>
