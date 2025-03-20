@@ -48,7 +48,7 @@ const MenuProps = {
 export default function ModalBox(props) {
 
     const [activeModal , setActiveModal] = React.useState(false)
-    const {open ,selectedName,filterOpen,filterClose,filterName} = props;
+    const {open ,selectedName,filterOpen,filterClose,filterName,editedName,handleEditClose,editOpen} = props;
     const [role] = React.useState('');
     const [hide ,setHide] = React.useState(false)
     
@@ -120,6 +120,88 @@ export default function ModalBox(props) {
                 <Select
                   value={createUser.roleId}
                   onChange={handleChange}
+                  name='roleId'
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                >
+                  <MenuItem value="">
+                    <em>Select</em>
+                  </MenuItem>
+                  {
+                    roles.map((role)=>{
+                      return (
+                        <MenuItem key={role.id} value={role.name}>
+                          {role.name}
+                        </MenuItem>
+                      )
+                    })
+                  }
+                </Select>
+              </div>
+            </Grid>
+          </Grid>
+          <div className='btnGroup'>
+            <ButtonGroup>
+              <Button variant='contained' color='error' onClick={handleCloseUser} className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleCreate} className='btn'>Create</Button>
+            </ButtonGroup>
+          </div>
+        </Box>
+      </Modal>
+    )
+  }
+
+  if(editedName === 'User Listings' ){
+    return (
+      <Modal
+        open={editOpen}
+        onClose={handleEditClose}
+        aria-labelledby="parent-modal-title"
+      >
+        <Box  sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
+          <h2 className='userCreate' id="parent-modal-title">Update User</h2>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid size={6}>
+              <div className='formField'>
+                <label htmlFor='name'>Name <span className='star'>*</span></label>
+                <TextField label='FullName' variant="outlined" autoComplete='off' name="name" />
+              </div>
+            </Grid>
+            <Grid size={6}>
+               <div className='formField'>
+                <label htmlFor="email" >Email <span className='star'>*</span></label>
+                <TextField label='Email' variant="outlined" autoComplete='off' name="email" />
+              </div>
+            </Grid>
+          </Grid>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <Grid size={6}>
+                <div className='formField'>
+                  <label htmlFor="password">Password <span className='star'>*</span></label>
+                  <TextField label='Password' variant="outlined" type={hide ? 'text':'password'} autoComplete='off'  name="password" />
+                    {
+                      hide ? <VisibilityIcon className='eyeIcon' onClick={() =>setHide(!hide)}/> : <VisibilityOffIcon className='eyeIcon' onClick={() =>setHide(!hide)}/>
+                    }
+                </div>
+              </Grid>
+              <Grid size={6}>
+                <div className='formField'>
+                  <label htmlFor="Phone Number">Phone Number <span className='star'>*</span></label>
+                  <TextField label='Phone Number' variant="outlined" autoComplete='off' type='number' name="phoneNumber" />
+                </div>
+              </Grid>
+          </Grid>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid size={6}>
+               <div className='formField'>
+                <label htmlFor="Address">Address <span className='star'>*</span></label>
+                <TextField label='Address' variant="outlined" autoComplete='off' name='address' />
+              </div>
+            </Grid>
+            <Grid size={6}>
+               <div className='formField'>
+                <label htmlFor="Role">Role <span className='star'>*</span></label>
+                <Select
                   name='roleId'
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}

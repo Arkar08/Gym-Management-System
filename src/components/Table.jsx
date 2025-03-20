@@ -113,7 +113,7 @@ function EnhancedTableHead(props) {
 
 
 function EnhancedTableToolbar(props) {
-  const { numSelected,name,handleOpen,allData,filterClick } = props;
+  const { numSelected,name,handleOpen,allData,filterClick,handleEdit,selectedId } = props;
 
   return (
     <Toolbar
@@ -181,7 +181,7 @@ function EnhancedTableToolbar(props) {
                             <>
                               <Tooltip title="Edit">
                                 <Fab color="primary" aria-label="Edit" size='small'>
-                                  <EditIcon />
+                                  <EditIcon onClick={()=> handleEdit({name,selectedId})}/>
                                 </Fab>
                               </Tooltip>
                               <Tooltip title="Delete">
@@ -260,9 +260,10 @@ export default function DataTable({name,rows,headCells}) {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [selectedId,setSelectedId] = React.useState(null)
 
 
-  const {selectedName,open,filterOpen,filterName,handleOpen,handleClose,filterClick,filterClose} = React.useContext(TableContext)
+  const {selectedName,open,filterOpen,filterName,handleOpen,handleClose,filterClick,filterClose,handleEdit,editedName,editOpen,handleEditClose} = React.useContext(TableContext)
   const {handleAccept,handleCancelReject} = React.useContext(SalePlanContext)
   const {handleApprove,handleCancel} = React.useContext(BookingContext)
 
@@ -285,7 +286,7 @@ export default function DataTable({name,rows,headCells}) {
   const handleClick = (event, id) => {
     const selectedIndex = selected.indexOf(id);
     let newSelected = [];
-
+    setSelectedId(id)
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
@@ -327,8 +328,8 @@ export default function DataTable({name,rows,headCells}) {
   return (
     <Box sx={{width:'100%'}}>
       <Paper sx={{width:'100%', mb: 2}}>
-        <EnhancedTableToolbar numSelected={selected.length} name={name} handleOpen={handleOpen} allData ={rows.length} filterClick={filterClick}/>
-        <ModalBox  handleClose={handleClose} open={open} selectedName={selectedName} filterClose={filterClose} filterName={filterName} filterOpen={filterOpen}/>
+        <EnhancedTableToolbar numSelected={selected.length} name={name} handleOpen={handleOpen} allData ={rows.length} filterClick={filterClick} handleEdit={handleEdit} selectedId={selectedId}/>
+        <ModalBox  handleClose={handleClose} open={open} selectedName={selectedName} filterClose={filterClose} filterName={filterName} filterOpen={filterOpen} editedName={editedName} editOpen={editOpen} handleEditClose={handleEditClose}/>
         <TableContainer>
           <Table
           sx={{width:"100%"}}

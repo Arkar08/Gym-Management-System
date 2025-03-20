@@ -12,6 +12,9 @@ const TableProvider = ({children}) =>{
     const [filterOpen , setFilterOpen] = useState(false)
     const [filterName , setFilterName] = useState('')
     const [show , setShow] = useState(true)
+    const [editedName,setEditedName] = useState('')
+    const [editId,setEditId] = useState(null)
+    const [editOpen , setEditOpen] = useState(false)
 
     const filterClick = ({name})=>{
         setFilterName(name)
@@ -34,10 +37,20 @@ const TableProvider = ({children}) =>{
         setOpen(false);
     };
 
+    const handleEdit = ({name,selectedId}) =>{
+        setEditedName(name)
+        setEditId(selectedId)
+        setEditOpen(true)
+    }
+
+    const handleEditClose = () =>{
+        setEditedName("")
+        setEditOpen(false)
+    }
 
 
     return (
-        <TableContext.Provider value={{selectedName,setSelectedName,open,setOpen,filterOpen,setFilterOpen,filterName,setFilterName,show,handleOpen,handleClose,filterClick,filterClose,setShow}}>
+        <TableContext.Provider value={{selectedName,setSelectedName,open,setOpen,filterOpen,setFilterOpen,filterName,setFilterName,show,handleOpen,handleClose,filterClick,filterClose,setShow,editedName,editId,handleEdit,editOpen,handleEditClose}}>
             {children}
         </TableContext.Provider>
     )
