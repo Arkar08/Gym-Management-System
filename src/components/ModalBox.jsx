@@ -48,7 +48,7 @@ const MenuProps = {
 export default function ModalBox(props) {
 
     const [activeModal , setActiveModal] = React.useState(false)
-    const {open ,selectedName,filterOpen,filterClose,filterName,editedName,handleEditClose,editOpen} = props;
+    const {open ,selectedName,filterOpen,filterClose,filterName,editedName,handleEditClose,editOpen,updateUser,handleUpdateUser,userOnChange,handleUpdateClass,updateClass} = props;
     const [role] = React.useState('');
     const [hide ,setHide] = React.useState(false)
     
@@ -164,13 +164,13 @@ export default function ModalBox(props) {
             <Grid size={6}>
               <div className='formField'>
                 <label htmlFor='name'>Name <span className='star'>*</span></label>
-                <TextField label='FullName' variant="outlined" autoComplete='off' name="name" />
+                <TextField label='FullName' variant="outlined" autoComplete='off' name="name" value={updateUser.name} onChange={userOnChange}/>
               </div>
             </Grid>
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="email" >Email <span className='star'>*</span></label>
-                <TextField label='Email' variant="outlined" autoComplete='off' name="email" />
+                <TextField label='Email' variant="outlined" autoComplete='off' name="email" value={updateUser.email} onChange={userOnChange}/>
               </div>
             </Grid>
           </Grid>
@@ -178,7 +178,7 @@ export default function ModalBox(props) {
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="password">Password <span className='star'>*</span></label>
-                  <TextField label='Password' variant="outlined" type={hide ? 'text':'password'} autoComplete='off'  name="password" />
+                  <TextField label='Password' variant="outlined" type={hide ? 'text':'password'} autoComplete='off'  name="password" value={updateUser.password} onChange={userOnChange}/>
                     {
                       hide ? <VisibilityIcon className='eyeIcon' onClick={() =>setHide(!hide)}/> : <VisibilityOffIcon className='eyeIcon' onClick={() =>setHide(!hide)}/>
                     }
@@ -187,7 +187,7 @@ export default function ModalBox(props) {
               <Grid size={6}>
                 <div className='formField'>
                   <label htmlFor="Phone Number">Phone Number <span className='star'>*</span></label>
-                  <TextField label='Phone Number' variant="outlined" autoComplete='off' type='number' name="phoneNumber" />
+                  <TextField label='Phone Number' variant="outlined" autoComplete='off' type='number' name="phoneNumber" value={updateUser.phoneNumber} onChange={userOnChange}/>
                 </div>
               </Grid>
           </Grid>
@@ -195,7 +195,7 @@ export default function ModalBox(props) {
             <Grid size={6}>
                <div className='formField'>
                 <label htmlFor="Address">Address <span className='star'>*</span></label>
-                <TextField label='Address' variant="outlined" autoComplete='off' name='address' />
+                <TextField label='Address' variant="outlined" autoComplete='off' name='address' value={updateUser.address} onChange={userOnChange}/>
               </div>
             </Grid>
             <Grid size={6}>
@@ -203,6 +203,8 @@ export default function ModalBox(props) {
                 <label htmlFor="Role">Role <span className='star'>*</span></label>
                 <Select
                   name='roleId'
+                  value={updateUser.roleId}
+                  onChange={userOnChange}
                   displayEmpty
                   inputProps={{ 'aria-label': 'Without label' }}
                 >
@@ -224,8 +226,8 @@ export default function ModalBox(props) {
           </Grid>
           <div className='btnGroup'>
             <ButtonGroup>
-              <Button variant='contained' color='error' onClick={handleCloseUser} className='btn'>Cancel</Button>
-              <Button variant='contained' color='success' onClick={handleCreate} className='btn'>Create</Button>
+              <Button variant='contained' color='error' onClick={handleEditClose} className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleUpdateUser} className='btn'>Update</Button>
             </ButtonGroup>
           </div>
         </Box>
@@ -338,6 +340,118 @@ export default function ModalBox(props) {
             <ButtonGroup >
               <Button variant='contained' color='error' onClick={handleCloseClass}  className='btn'>Cancel</Button>
               <Button variant='contained' color='success' onClick={createClassChange}  className='btn'>Create</Button>
+            </ButtonGroup>
+          </div>
+        </Box>
+      </Modal>
+    )
+  }
+
+  if(selectedName === 'Class Listings' ){
+    return (
+      <Modal
+        open={editOpen}
+        onClose={handleEditClose}
+        aria-labelledby="parent-modal-title"
+      >
+        <Box sx={{...style}} className={activeModal ? 'activeModal' : 'modal'}>
+          <h2 className='userCreate' id="parent-modal-title">Update ClassList</h2>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid size={6}>
+              <div className='formField'>
+                <label htmlFor='Class Name'>Class Name <span className='star'>*</span></label>
+                <TextField label='ClassName' variant="outlined" value={updateClass.className} name="className" onChange={handleClassChange} autoComplete='off'/>
+              </div>
+            </Grid>
+            <Grid size={6}>
+               <div className='formField'>
+                <label htmlFor="Select Trainer" >Select Trainer <span className='star'>*</span></label>
+                <Select
+                  value={updateClass.trainer}
+                  onChange={handleClassChange}
+                  name='trainer'
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                >
+                  <MenuItem value="">
+                    <em>Select</em>
+                  </MenuItem>
+                  {
+                    trainer.map((train)=>{
+                      return(
+                        <MenuItem key={train.id} value={train.name}>
+                          {train.name}
+                        </MenuItem>
+                      )
+                    })
+                  }
+                </Select>
+              </div>
+            </Grid>
+          </Grid>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <Grid size={6}>
+                <div className='formField'>
+                  <label htmlFor="Start Time">Start Time <span className='star'>*</span></label>
+                  <input type="time" placeholder='Start Time' className='inputTime' value={updateClass.startTime} name='startTime'  min="09:00" max="18:00" required onChange={handleClassChange}/>
+                </div>
+              </Grid>
+              <Grid size={6}>
+                <div className='formField'>
+                  <label htmlFor="End Time ">End Time <span className='star'>*</span></label>
+                  <input type="time" placeholder='End Time' className='inputTime' value={updateClass.endTime} name='endTime' min="09:00" max="18:00" required onChange={handleClassChange}/>
+                </div>
+              </Grid>
+          </Grid>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid size={6}>
+               <div className='formField'>
+                <label htmlFor="Days">Days <span className='star'>*</span></label>
+                <Select
+                  labelId="demo-multiple-checkbox-label"
+                  id="demo-multiple-checkbox"
+                  multiple
+                  value={updateClass.days}
+                  onChange={handleClassChange}
+                  name='days'
+                  input={<OutlinedInput label="Tag" />}
+                  renderValue={(selected) => selected.join(', ')}
+                  MenuProps={MenuProps}
+                >
+                {daysType.map((days) => (
+                  <MenuItem key={days} value={days}>
+                    <Checkbox checked={updateClass.days.includes(days)} />
+                    <ListItemText primary={days} />
+                  </MenuItem>
+                ))}
+                </Select>
+              </div>
+            </Grid>
+            <Grid size={6}>
+               <div className='formField'>
+                <label htmlFor="Capacity">Capacity <span className='star'>*</span></label>
+                <TextField label='Capacity' variant="outlined" type='number' value={updateClass.capacity} name='capacity' onChange={handleClassChange} autoComplete='off'/>
+              </div>
+            </Grid>
+          </Grid>
+          <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid size={6}>
+               <div className='formField'>
+                <label htmlFor="Price">Price <span className='star'>*</span></label>
+                <TextField label='Price' variant="outlined" type='number' value={updateClass.price} name='price'onChange={handleClassChange} autoComplete='off'/>
+              </div>
+            </Grid>
+            <Grid size={6}>
+               <div className='formField'>
+                <label htmlFor="Notes">Notes <span className='star'>*</span></label>
+                <TextField label='Notes' variant="outlined" value={updateClass.notes} name='notes'onChange={handleClassChange} autoComplete='off'/>
+              </div>
+            </Grid>
+          </Grid>
+          <div className='btnGroup'>
+            <ButtonGroup >
+              <Button variant='contained' color='error' onClick={handleEditClose}  className='btn'>Cancel</Button>
+              <Button variant='contained' color='success' onClick={handleUpdateClass}  className='btn'>Create</Button>
             </ButtonGroup>
           </div>
         </Box>

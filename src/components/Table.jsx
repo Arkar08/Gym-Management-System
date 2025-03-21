@@ -263,7 +263,7 @@ export default function DataTable({name,rows,headCells}) {
   const [selectedId,setSelectedId] = React.useState(null)
 
 
-  const {selectedName,open,filterOpen,filterName,handleOpen,handleClose,filterClick,filterClose,handleEdit,editedName,editOpen,handleEditClose} = React.useContext(TableContext)
+  const {selectedName,open,filterOpen,filterName,handleOpen,handleClose,filterClick,filterClose,handleEdit,editedName,editOpen,handleEditClose,updateUser,handleUpdateUser,userOnChange,handleUpdateClass} = React.useContext(TableContext)
   const {handleAccept,handleCancelReject} = React.useContext(SalePlanContext)
   const {handleApprove,handleCancel} = React.useContext(BookingContext)
 
@@ -329,7 +329,7 @@ export default function DataTable({name,rows,headCells}) {
     <Box sx={{width:'100%'}}>
       <Paper sx={{width:'100%', mb: 2}}>
         <EnhancedTableToolbar numSelected={selected.length} name={name} handleOpen={handleOpen} allData ={rows.length} filterClick={filterClick} handleEdit={handleEdit} selectedId={selectedId}/>
-        <ModalBox  handleClose={handleClose} open={open} selectedName={selectedName} filterClose={filterClose} filterName={filterName} filterOpen={filterOpen} editedName={editedName} editOpen={editOpen} handleEditClose={handleEditClose}/>
+        <ModalBox  handleClose={handleClose} open={open} selectedName={selectedName} filterClose={filterClose} filterName={filterName} filterOpen={filterOpen} editedName={editedName} editOpen={editOpen} handleEditClose={handleEditClose} updateUser={updateUser} handleUpdateUser={handleUpdateUser} userOnChange={userOnChange} handleUpdateClass={handleUpdateClass}/>
         <TableContainer>
           <Table
           sx={{width:"100%"}}

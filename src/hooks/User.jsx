@@ -25,7 +25,7 @@ const UserProvider  = ({children}) =>{
         roleId:"",
         createdDate:""
     })
-
+   
     useEffect(()=>{
         getUser()
         getRole()
@@ -33,11 +33,10 @@ const UserProvider  = ({children}) =>{
         getCustomer()
     },[])
 
-
     const getUser = async() =>{
         const { data: User,error } = await supabase
         .from('User')
-        .select('*').order('createdDate', { ascending: false })
+        .select('*').order('updatedDate', { ascending: true })
         setError(error)
         setUsers(User);
     }
